@@ -23,7 +23,7 @@ void Category::setName(string cname)
 void Category::addProduct(string item,float price)
 {
     string cat = name.substr(0,2);
-    for(char& c : cat) toupper(c);
+    for(char& c : cat) c = toupper(c);
     cat+="-" + to_string(NumofProducts);
     product p(item,price,cat);
     products.insert(p);
