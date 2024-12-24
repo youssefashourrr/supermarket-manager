@@ -14,7 +14,7 @@ public:
   Category();
   Category(string,int);
   void setName(string);
-  void addProduct(string,float,int);
+  void addProduct(string,float);
   AvlTree<product> getProducts();
   void removeProduct(string);
   ~Category();
