@@ -1,6 +1,4 @@
-#include <bits/stdc++.h>
 #include "category.h"
-using namespace std;
 
 Category::Category()
 {
@@ -31,7 +29,7 @@ void Category::addProduct(string item,float price)
 
 void Category::removeProduct(string item)
 {
-  product p(item,0,0,"");
+  product p(item,0.0,"");
   bool found = products.search(p);
   if(found) products.remove(p);
 

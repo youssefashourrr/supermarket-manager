@@ -1,7 +1,5 @@
-#include <bits/stdc++.h>
-#include "product.h"
 #include "avltree.h"
-using namespace std;
+#include "product.h"
 
 class Category
 {
@@ -19,9 +17,3 @@ public:
   void removeProduct(string);
   ~Category();
 };
-
-
-
-
-
-

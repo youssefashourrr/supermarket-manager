@@ -1,12 +1,11 @@
-#include <bits/stdc++.h>
 #include "product.h"
 using namespace std;
+
 
 product::product()
 {
   this->name = "";
   this->price = 0.0;
-  this->quantity = 0;
   this->code = "";
 }
 
@@ -90,6 +89,6 @@ bool product::operator!=(const product& other) const
 
 ostream& operator<<(ostream& os, const product& item)
 {
-   os<<"Product: "<< item.name<<" "<<item.code<<endl;
+   os <<"Product: "<< item.name<<" "<< item.code<< endl;
    return os;
 }

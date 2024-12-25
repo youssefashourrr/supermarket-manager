@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "any": "cpp",
+        "optional": "cpp",
+        "utility": "cpp",
+        "map": "cpp"
+    }
+}

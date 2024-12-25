@@ -1,6 +1,4 @@
-#include <bits/stdc++.h>
-#include "node.h"
-using namespace std;
+#include "ll-node.h"
 
 template<class T>
 class Double_LL

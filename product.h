@@ -1,5 +1,6 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
+
 
 class product
 {
@@ -30,9 +31,4 @@ public:
   bool operator>=(const product& other) const;
   bool operator==(const product& other) const;
   bool operator!=(const product& other) const;
-
 };
-
-
-
-
