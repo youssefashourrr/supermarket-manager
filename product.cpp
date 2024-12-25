@@ -2,93 +2,93 @@
 using namespace std;
 
 
-product::product()
+Product::Product()
 {
-  this->name = "";
-  this->price = 0.0;
-  this->code = "";
+    this->name = "";
+    this->price = 0.0;
+    this->code = "";
 }
 
-product::product(string name)
+Product::Product(string name)
 {
     this->name = name;
     this->price = 0.0;
     this->code = "";
 }
-product::product(string name, float price, string code)
+Product::Product(string name, float price, string code)
 {
-  this->name = name;
-  this->price = price;
-  this->code = code;
+    this->name = name;
+    this->price = price;
+    this->code = code;
 }
 
-string product::getName()
+string Product::getName()
 {
     return name;
 }
 
-float product::getPrice()
+float Product::getPrice()
 {
 	return price;
 }
 
-string product::getCode()
+string Product::getCode()
 {
 	return code;
 }
 
-void product::setName(string name)
+void Product::setName(string name)
 {
 	this->name = name;
 }
 
-void product::setPrice(float price)
+void Product::setPrice(float price)
 {
 	this->price = price;
 }
 
-void product::setCode(string code)
+void Product::setCode(string code)
 {
 	this->code = code;
 }
 
-product& product::getProduct()
+Product& Product::getProduct()
 {
-	  return *this;
+	return *this;
 }
 
-bool product::operator<(const product& other) const
+bool Product::operator<(const Product& other) const
 {
-  return this->name < other.name;
+  	return this->name < other.name;
 }
 
-bool product::operator>(const product& other) const
+bool Product::operator>(const Product& other) const
 {
-  return this->name > other.name;
+  	return this->name > other.name;
 }
 
-bool product::operator<=(const product& other) const
+bool Product::operator<=(const Product& other) const
 {
-  return this->name <= other.name;
+  	return this->name <= other.name;
 }
 
-bool product::operator>=(const product& other) const
+bool Product::operator>=(const Product& other) const
 {
-  return this->name >= other.name;
+    return this->name >= other.name;
 }
 
-bool product::operator==(const product& other) const
+bool Product::operator==(const Product& other) const
 {
-  return this->name == other.name;
+  	return this->name == other.name;
 }
 
-bool product::operator!=(const product& other) const
+bool Product::operator!=(const Product& other) const
 {
-  return !(this->name == other.name);
+  	return !(this->name == other.name);
 }
 
-ostream& operator<<(ostream& os, const product& item)
+ostream& operator<<(ostream& os, const Product& item)
 {
-   os <<"Product: "<< item.name<<" "<< item.code<< endl;
-   return os;
+	os <<"Product: "<< item.name << " " << item.code << endl;
+	return os;
 }

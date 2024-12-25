@@ -1,7 +1,7 @@
 #include "ll-node.h"
 
 template<class T>
-class Double_LL
+class DoubleLL
 {
 private:
   node<T>* head;
