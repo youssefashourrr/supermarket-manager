@@ -1,18 +1,18 @@
 template<class T>
-class node
+class Node
 {
 public:
   T data;
-  node<T> *next;
-  node<T> *prev;
+  Node<T> *next;
+  Node<T> *prev;
 
-    node()
+    Node()
     {
          data = NULL;
          next = nullptr;
          prev = nullptr;
     }
-    node(T data, node<T> *n =nullptr, node<T> *p =nullptr)
+    Node(T data, Node<T> *n =nullptr, Node<T> *p =nullptr)
     {
       this->data = data;
       next = n;
