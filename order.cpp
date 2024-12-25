@@ -1,12 +1,12 @@
-#include <order.h>
+#include "order.h"
 
 
-Order::Order(string id, Double_LL<product> checkoutItems) {
+Order::Order(string id, DoubleLL<Product> checkoutItems) {
     this->id = id;
-    //user declaration
+    //user declaration (ashour)
     this->checkoutItems = checkoutItems;
 }
 
-Double_LL<product> Order::getItems() const {
+DoubleLL<Product> Order::getItems() const {
     return this->checkoutItems;
 }

@@ -7,11 +7,11 @@
 class Order {
     private:
         string id;
-        // user person;
-        Double_LL<product> checkoutItems;
+        string name;
+        DoubleLL<Product> checkoutItems;
 
     public:
-        Order(string, Double_LL<product>);
-        Double_LL<product> getItems() const;
+        Order(string, DoubleLL<Product>);
+        DoubleLL<Product> getItems() const;
         // get user
 };
