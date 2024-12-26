@@ -1,7 +1,8 @@
 #include "bstnode.h"
+#include <vector>
+using namespace std;
 
-
-template<class T>
+template <class T>
 class AvlTree
 {
 private:
@@ -61,9 +62,10 @@ private:
     BSTNode<T>* insert(T val,BSTNode<T>* r)
     {
         if(!r) r = new BSTNode<T>(val);
+        if(r->val == val) return nullptr;
         else
         {
-            if (r->data <= val) r->right = insert(val,r->right);
+            if (r->data < val) r->right = insert(val,r->right);
             else if (r->data > val) r->left = insert(val,r->left);
         }
         r->height = 1 + max(height(r->left),height(r->right));
@@ -165,6 +167,14 @@ private:
         if (r-> right) inorder(os, r->right);
     }
 
+    void inorder(vector<T> v, BSTNode<T>* r) const
+    {
+        if (r == nullptr) return;
+        if (r->left) inorder(os, r->left);
+        v.push_back(r->data);
+        if (r-> right) inorder(os, r->right);
+    }
+
 public:
     AvlTree()
     {
@@ -227,6 +237,13 @@ public:
     int height( )
     {
         return height(root);
+    }
+
+    vector<T> AvlTreeAsVector()
+    {
+      vector<T> v;
+      inorder(v, root);
+      return v;
     }
 
     ~AvlTree()
