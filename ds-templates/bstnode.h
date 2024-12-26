@@ -6,7 +6,7 @@ struct BSTNode
     BSTNode<T>* right;
     int height;
 
-    BSTNode(T val,BSTNode<T>* l = NULL,BSTNode<T>* r = NULL)
+    BSTNode(T val, BSTNode<T>* l = NULL, BSTNode<T>* r = NULL)
     {
         data = val;
         left = l;

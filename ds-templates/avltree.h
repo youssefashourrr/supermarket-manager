@@ -2,6 +2,7 @@
 #include <vector>
 using namespace std;
 
+
 template <class T>
 class AvlTree
 {
@@ -65,11 +66,11 @@ private:
         if(r->val == val) return nullptr;
         else
         {
-            if (r->data < val) r->right = insert(val,r->right);
-            else if (r->data > val) r->left = insert(val,r->left);
+            if (r->data < val) r->right = insert(val, r->right);
+            else if (r->data > val) r->left = insert(val, r->left);
         }
-        r->height = 1 + max(height(r->left),height(r->right));
-        return BalanceAVL(r,val);
+        r->height = 1 + max(height(r->left), height(r->right));
+        return BalanceAVL(r, val);
     }
 
     BSTNode<T>* remove(BSTNode<T>* r, T val)
@@ -145,11 +146,11 @@ private:
         delete r;
     }
 
-
     int height(BSTNode<T>* r)
     {
         return r ? r->height : 0;
     }
+
     void preorder(BSTNode<T>* r)
     {
         if(r==nullptr) return;
@@ -188,7 +189,7 @@ public:
 
     void insert(T val)
     {
-        root = insert(val,root);
+        root = insert(val, root);
     }
 
     void remove(T val)
@@ -228,7 +229,8 @@ public:
         cout << endl;
     }
 
-    friend ostream& operator<<(ostream& os, const AvlTree<T>& tree) {
+    friend ostream& operator<<(ostream& os, const AvlTree<T>& tree) 
+    {
         tree.inorder(os, tree.root);
         cout << endl;  
         return os;
