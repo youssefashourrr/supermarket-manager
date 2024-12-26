@@ -1,15 +1,14 @@
 #include "categories.h"
-#include "avltree.h"
-#include "category.h"
+#include "json.hpp"   // For JSON handling using nlohmann::json
 #include <iostream>   // For input/output operations (cin, cout)
 #include <fstream>    // For file operations (ifstream, ofstream)
 #include <set>        // For std::set to store categories
 #include <string>     // For std::string
 #include <vector>     // For std::vector to store product lists
-#include "json.hpp"   // For JSON handling using nlohmann::json
 
 using namespace std;
 using json = nlohmann::json;
+
 
 Categories::Categories() {
     // Load categories from the file
@@ -45,13 +44,19 @@ bool Categories::isInCategories(const string& name) const {
     return false; // No matching category found
 }
 
+set<Category>::iterator Categories::findCategory(string name) {
+    for (set<Category>::iterator it = groups.begin(); it != groups.end(); it++) {
+        if (it->getName() == name) return it;
+    }
+    return groups.end();
+}
+
 void Categories::addCategory(Category c) {
     groups.insert(c); // Add new category to the set
 
     // Save updated categories to the file
     saveCategoriesToFile();
 }
-
 
 void Categories::removeCategory(string name) {
     if (this->isInCategories(name)) {
@@ -62,6 +67,7 @@ void Categories::removeCategory(string name) {
         saveCategoriesToFile();
     }
 }
+
 void Categories::saveCategoriesToFile() {
     json categoriesJson = json::array(); // JSON array to hold all categories
 

@@ -12,7 +12,6 @@ class Orders {
         Orders();
         queue<Order> getPending() const;
         vector<Order> getProcessed() const;
-        
         void addOrder(Order);
         void processOrder();
 };

@@ -9,10 +9,9 @@ class Categories {
     
     public:
         Categories();
-        bool isInCategories(const string &name) const;
         void addCategory(Category);
         void removeCategory(string);
         set<Category>::iterator findCategory(string);
+        bool isInCategories(const string &name) const;
         void saveCategoriesToFile();
-
 };

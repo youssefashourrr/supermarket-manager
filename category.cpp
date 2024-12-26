@@ -19,7 +19,7 @@ string Category::getName() const
 }
 
 int Category::getProductCount() const{
-  return numOfProducts;
+	return numOfProducts;
 }
 
 void Category::addProduct(string item, float price)

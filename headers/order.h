@@ -1,7 +1,7 @@
 #include <double-ll.h>
 #include <product.h>
-// include shopping cart
-// include user
+// include shopping cart (ashour)
+// include user (ashour)
 
 
 class Order {
@@ -13,5 +13,5 @@ class Order {
     public:
         Order(string, DoubleLL<Product>);
         DoubleLL<Product> getItems() const;
-        // get user
+        // get user (ashour)
 };
