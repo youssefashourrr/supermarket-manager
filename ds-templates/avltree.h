@@ -170,9 +170,9 @@ private:
     void inorder(vector<T> v, BSTNode<T>* r) const
     {
         if (r == nullptr) return;
-        if (r->left) inorder(os, r->left);
+        if (r->left) inorder(v, r->left);
         v.push_back(r->data);
-        if (r-> right) inorder(os, r->right);
+        if (r-> right) inorder(v, r->right);
     }
 
 public:
