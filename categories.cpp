@@ -35,12 +35,23 @@ Categories::Categories() {
     }
 }
 
+bool Categories::isInCategories(const string& name) const {
+    // Iterate over the categories in the set
+    for (const auto& category : groups) {
+        if (category.getName() == name) {
+            return true; // Found a matching category
+        }
+    }
+    return false; // No matching category found
+}
+
 void Categories::addCategory(Category c) {
     groups.insert(c); // Add new category to the set
 
     // Save updated categories to the file
     saveCategoriesToFile();
 }
+
 
 void Categories::removeCategory(string name) {
     if (this->isInCategories(name)) {
@@ -62,9 +73,13 @@ void Categories::saveCategoriesToFile() {
         categoryJson["name"] = category.getName();
         categoryJson["productCount"] = category.getProductCount();
 
-        // Save products from the AVL tree
-        
-        ;
+        // Retrieve products as a vector and save to JSON
+        vector<Product> productList = category.getProducts().AvlTreeAsVector();
+        categoryJson["products"] = json::array(); // JSON array for products
+
+        for (auto& product : productList) {
+            categoryJson["products"].push_back(product.toJson()); // Serialize each product to JSON
+        }
 
         // Add the category JSON object to the JSON array
         categoriesJson.push_back(categoryJson);
@@ -77,3 +92,4 @@ void Categories::saveCategoriesToFile() {
         file.close();
     }
 }
+

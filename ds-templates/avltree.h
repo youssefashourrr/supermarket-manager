@@ -167,7 +167,7 @@ private:
         if (r-> right) inorder(os, r->right);
     }
 
-    void inorder(vector<T> v, BSTNode<T>* r) const
+    void inorder(vector<T> &v, BSTNode<T>* r) const
     {
         if (r == nullptr) return;
         if (r->left) inorder(v, r->left);

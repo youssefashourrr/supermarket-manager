@@ -14,6 +14,7 @@ public:
   Product(string);
   Product(string,float,string);
   Product(const json& productJson);
+  json toJson();
 
   string getName();
   float getPrice();

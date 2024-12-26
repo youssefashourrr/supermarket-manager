@@ -27,6 +27,13 @@ Product::Product(const json& productJson){
         price = productJson["price"];    // Extract price
 		code = productJson["code"];		// Extract code
 }
+json Product::toJson() {
+    json productJson;
+    productJson["name"] = getName();
+    productJson["price"] = getPrice();
+	productJson["code"]= getCode();
+    return productJson;
+}
 
 string Product::getName()
 {
