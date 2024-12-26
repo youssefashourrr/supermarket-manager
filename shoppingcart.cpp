@@ -1,28 +1,24 @@
 #include "shoppingcart.h"
 shoppingcart::shoppingcart(){}    
-void shoppingcart::addItem(const product &item, int quantity)
+void shoppingcart::addItem(const Product &item, int quantity)
 {
      if(cartItems.search(item)){
-        updateQuantity(item,quantity);
+        updateQuantity(item,true);
         return;
      }
-     product newitem = item;
-    newitem.setPrice(item.getPrice() * quantity);
-    cartItems.AddtoTail(newitem);
-    undoStack.push(newitem);
+    cartItems.AddtoTail(item);
 }
-
-void shoppingcart::removeItem(const product &item)
+void shoppingcart::removeItem(const Product &item)
 {
     if(cartItems.search(item)==false) return;
-    product removeditem=item;
-    undoStack.push(removeditem);
-    cartItems.RemoveItem(item);
+    updateQuantity(item,false);
 }
-void shoppingcart::updateQuantity(const product& item, int newQuantity){
+void shoppingcart::updateQuantity(const Product& item, bool flag){
     if(cartItems.search(item)==false) return;
-    for (int i=0;i<newQuantity;i++){
-        product currentItem = item;
-        undoStack.push(currentItem);
-    }
+    if(flag) cartItems.incrementQuantity(item);
+    else cartItems.decrementQuantity(item);
+}
+DoubleLL<Product> shoppingcart::getCart()
+{
+    return cartItems;
 }
