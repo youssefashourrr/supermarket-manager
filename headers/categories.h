@@ -11,6 +11,7 @@ class Categories {
         Categories();
         void addCategory(Category);
         void removeCategory(string);
-        bool isInCategories(string);
         set<Category>::iterator findCategory(string);
+        void saveCategoriesToFile();
+
 };

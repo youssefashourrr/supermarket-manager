@@ -160,4 +160,10 @@ void
         }
         if(temp->quantity==0) RemoveItem(val);
   }
+  Node<T>* getHead(){
+    return head;
+  }
+  Node<T>* getTail(){
+    return Tail;
+  }
 };
