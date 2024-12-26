@@ -124,11 +124,40 @@ public:
         delete temp;
       }
   }
-
+  bool search(T val){
+        Node* temp = head;
+        while (temp) {
+            if (temp->data == val) {
+                return true;
+            }
+            temp = temp->next;
+        }
+        return false;
+    }
+void 
   ~Double_LL()
   {
     clear();
   }
-
-
+  void incrementQuantity(T val){
+    Node* temp = head;
+        while (temp) {
+            if (temp->data == val) {
+                temp->quantity++;
+                return;
+            }
+            temp = temp->next;
+        }
+  }
+  void decrementQuantity(T val){
+    Node* temp = head;
+        while (temp) {
+            if (temp->data == val) {
+                temp->quantity--;
+                break;
+            }
+            temp = temp->next;
+        }
+        if(temp->quantity==0) RemoveItem(val);
+  }
 };

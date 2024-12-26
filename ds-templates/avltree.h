@@ -66,9 +66,7 @@ private:
             if (r->data <= val) r->right = insert(val,r->right);
             else if (r->data > val) r->left = insert(val,r->left);
         }
-
         r->height = 1 + max(height(r->left),height(r->right));
-
         return BalanceAVL(r,val);
     }
 
