@@ -13,6 +13,7 @@ public:
   Product();
   Product(string);
   Product(string,float,string);
+  Product(const json& productJson);
 
   string getName();
   float getPrice();

@@ -1,6 +1,7 @@
 #include "product.h"
+#include "json.hpp"
 using namespace std;
-
+using json = nlohmann::json;
 
 Product::Product()
 {
@@ -20,6 +21,11 @@ Product::Product(string name, float price, string code)
     this->name = name;
     this->price = price;
     this->code = code;
+}
+Product::Product(const json& productJson){
+	    name = productJson["name"];      // Extract name
+        price = productJson["price"];    // Extract price
+		code = productJson["code"];		// Extract code
 }
 
 string Product::getName()

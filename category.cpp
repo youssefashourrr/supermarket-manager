@@ -18,8 +18,13 @@ string Category::getName() const
     return name;
 }
 
+int Category::getProductCount() const{
+  return numOfProducts;
+}
+
 void Category::addProduct(string item, float price)
 {
+    numOfProducts ++;
     string cat = name.substr(0,2);
     for(char& c : cat) c = toupper(c);
     cat += "-" + to_string(numOfProducts);
