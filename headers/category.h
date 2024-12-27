@@ -5,15 +5,15 @@
 class Category
 {
 private:
-    AvlTree<Product> products;
+    AvlTree<Product>* products;
     string name;
     int numOfProducts = 0;
 
 public:
 	Category(string);
-	Category(string, int, AvlTree<Product>);
+	Category(string, int, AvlTree<Product>*);
   	void setName(string);
-	AvlTree<Product> getProducts() const;
+	AvlTree<Product>* getProducts();
 	string getName() const;
 	int getProductCount() const;
 	void addProduct(string, float);

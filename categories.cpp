@@ -2,99 +2,133 @@
 
 
 Categories::Categories() {
-    // Load categories from the file
-    ifstream file("data/categories.json"); // Open JSON file for reading
-    json categoriesJson;             // JSON object to parse data
-    if (file.is_open()) {
-        file >> categoriesJson; // Read JSON content
-        file.close();           // Close the file
+    groups = {};
+    ifstream file("data/categories.json", ios::in | ios::ate);
+    if (!file.is_open()) {
+        cout << "Failed to open categories file. Initializing empty categories." << endl;
+        return;
+    }
 
-        if (!categoriesJson.empty()) { // If file is not empty
+    if (file.tellg() == 0) {
+        cout << "Categories file is completely empty." << endl;
+        file.close();
+        return;
+    }
+
+    file.seekg(0);
+    json categoriesJson;
+    try {
+        file >> categoriesJson;
+    } 
+    catch (const std::exception& e) {
+        cout << "Error parsing JSON: " << e.what() << endl;
+        file.close();
+        return;
+    }
+    file.close();
+
+    if (categoriesJson.is_array()) {
+        if (categoriesJson.empty()) {
+            cout << "Categories file contains an empty array ([])." << endl;
+        } 
+        else {
             for (const auto& categoryJson : categoriesJson) {
-                string name = categoryJson["name"];         // Extract category name
-                int productCount = categoryJson["productCount"]; // Extract product count
-                AvlTree<Product> products;
-                for (const auto& productJson : categoryJson["products"]) {
-                    Product product(productJson);  // Create Product object from JSON
-                    products.insert(product);
+                try {
+                    string name = categoryJson.at("name");
+                    int productCount = categoryJson.at("productCount");
+                    AvlTree<Product> products;
+
+                    for (const auto& productJson : categoryJson.at("products")) {
+                        Product product(productJson);
+                        products.insert(product);
+                    }
+
+                    groups.insert(new Category(name, productCount, &products));
+                } 
+                catch (const std::exception& e) {
+                    cout << "Error parsing category or product: " << e.what() << endl;
                 }
-                // Create a category and add it to the set
-                groups.insert(Category(name, productCount, products));
             }
         }
-    }
+    } 
     else {
-        groups = {};
+        cout << "Categories file is malformed or not a valid JSON array." << endl;
     }
+}
+
+Categories::~Categories() {
+    for (auto category : groups) {
+        delete category;  // Free allocated memory
+    }
+    groups.clear();  // Clear the set after deletion
+}
+
+set<Category*> Categories::getGroups() const {
+    return groups;
 }
 
 bool Categories::isInCategories(const string& name) const {
-    // Iterate over the categories in the set
     for (const auto& category : groups) {
-        if (category.getName() == name) {
-            return true; // Found a matching category
+        if (category != nullptr && category->getName() == name) {
+            return true;
         }
     }
-    return false; // No matching category found
+    return false;
 }
 
-set<Category>::iterator Categories::findCategory(string name) {
-    for (set<Category>::iterator it = groups.begin(); it != groups.end(); it++) {
-        if (it->getName() == name) return it;
+set<Category*>::iterator Categories::findCategory(string name) {
+    for (auto it = groups.begin(); it != groups.end(); ++it) {
+        if (*it != nullptr && (*it)->getName() == name) {
+            return it;
+        }
     }
     return groups.end();
 }
 
-void Categories::addCategory(Category c) {
-    groups.insert(c); // Add new category to the set
-
-    // Save updated categories to the file
-    if (ofstream("data/categories.json")) {
-    cout << "Directory and file exist or can be created." << endl;
-    } else {
-    cout << "Directory or file can't be accessed." << endl;
+void Categories::addCategory(Category* c) {
+    if (c == nullptr) {
+        cerr << "Cannot add a null category." << endl;
+        return;
     }
+    groups.insert(c);
     saveCategoriesToFile();
 }
 
 void Categories::removeCategory(string name) {
-    if (this->isInCategories(name)) {
-        auto it = this->findCategory(name); // Find the category
-        groups.erase(it);                   // Remove it from the set
-
-        // Save updated categories to the file
+    auto it = findCategory(name);
+    if (it != groups.end()) {
+        delete *it;          // Free memory for the removed category
+        groups.erase(it);    // Remove from the set
         saveCategoriesToFile();
+    } else {
+        cout << "Category '" << name << "' not found, nothing to remove." << endl;
     }
 }
 
 void Categories::saveCategoriesToFile() {
-    json categoriesJson = json::array(); // JSON array to hold all categories
+    ofstream outFile("data/categories.json");
+    if (outFile.is_open()) {
+        json categoriesJson = json::array();
+        for (const auto category : groups) {
+            if (category == nullptr) continue;  // Avoid null pointer access
+            json categoryJson;
+            categoryJson["name"] = category->getName();
+            categoryJson["productCount"] = category->getProductCount();
 
-    // Iterate through the set of categories
-    for (const auto& category : groups) {
-        json categoryJson; // JSON object for a single category
+            vector<Product> productList = category->getProducts()->AvlTreeAsVector();
+            categoryJson["products"] = json::array();
+            for (auto& product : productList) {
+                categoryJson["products"].push_back(product.toJson());
+            }
 
-        // Save category details
-        categoryJson["name"] = category.getName();
-        categoryJson["productCount"] = category.getProductCount();
-
-        // Retrieve products as a vector and save to JSON
-        vector<Product> productList = category.getProducts().AvlTreeAsVector();
-        categoryJson["products"] = json::array(); // JSON array for products
-
-        for (auto& product : productList) {
-            categoryJson["products"].push_back(product.toJson()); // Serialize each product to JSON
+            categoriesJson.push_back(categoryJson);
         }
 
-        // Add the category JSON object to the JSON array
-        categoriesJson.push_back(categoryJson);
-    }
-
-    // Write the JSON array to the file
-    ofstream file("data/categories.json");
-    if (file.is_open()) {
-        file << categoriesJson.dump(4); // Pretty-print JSON with 4 spaces of indentation
-        file.close();
+        outFile << categoriesJson.dump(4);
+        outFile.close();
+        cout << "File has been cleared and categories saved successfully." << endl;
+    } 
+    else {
+        cerr << "Failed to open the file for saving categories." << endl;
     }
 }
-
