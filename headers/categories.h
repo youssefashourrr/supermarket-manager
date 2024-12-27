@@ -12,14 +12,15 @@ using json = nlohmann::json;
 
 class Categories {
     private:
-        set<Category> groups;
+        set<Category*> groups;
     
     public:
         Categories();
-        set<Category> getGroups() const;
-        void addCategory(Category);
+        ~Categories();
+        set<Category*> getGroups() const;
+        void addCategory(Category*);
         void removeCategory(string);
-        set<Category>::iterator findCategory(string);
+        set<Category*>::iterator findCategory(string);
         bool isInCategories(const string &name) const;
         void saveCategoriesToFile();
 };

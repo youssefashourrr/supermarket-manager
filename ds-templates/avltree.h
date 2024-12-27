@@ -154,8 +154,8 @@ private:
         if (r == nullptr) return;
         clear(r->left);
         clear(r->right);
-        delete r;
         r = nullptr;
+        delete r;
     }
 
 public:
@@ -203,12 +203,12 @@ public:
         return height(root);
     }
 
-    vector<T> AvlTreeAsVector() {
+    vector<T> AvlTreeAsVector() const {
         vector<T> v;
         inorder(v, root);
         return v;
     }
-
+    
     ~AvlTree() {
         clear();
     }
