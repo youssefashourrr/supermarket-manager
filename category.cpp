@@ -1,5 +1,10 @@
-#include "category.h"
+#include "headers/category.h"
 
+
+Category::Category(string name)
+{
+	this->name = name;
+}
 
 Category::Category(string name, int numberOfProducts, AvlTree<Product> products)
 {
@@ -8,9 +13,14 @@ Category::Category(string name, int numberOfProducts, AvlTree<Product> products)
   this->products = products;
 }
 
-void Category::setName(string cname)
+void Category::setName(string name)
 {
-    name = cname;
+    this->name = name;
+}
+
+AvlTree<Product> Category::getProducts() const
+{
+  return products;
 }
 
 string Category::getName() const
@@ -24,7 +34,7 @@ int Category::getProductCount() const{
 
 void Category::addProduct(string item, float price)
 {
-    numOfProducts ++;
+    numOfProducts++;
     string cat = name.substr(0,2);
     for(char& c : cat) c = toupper(c);
     cat += "-" + to_string(numOfProducts);
@@ -36,12 +46,15 @@ void Category::removeProduct(string item)
 {
   Product p(item, 0.0, "");
   bool found = products.search(p);
-  if (found) products.remove(p);
+  if (found) {
+    products.remove(p);
+    numOfProducts--;
+  }
 }
 
-AvlTree<Product> Category::getProducts() const
+bool Category::operator<(const Category& other) const 
 {
-  return products;
+        return name < other.name;
 }
 
 Category::~Category()

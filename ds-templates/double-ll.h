@@ -1,3 +1,4 @@
+#include <iostream>
 #include "ll-node.h"
 
 
@@ -5,12 +6,12 @@ template<class T>
 class DoubleLL
 {
 	private:
-		node<T>* head;
-		node<T>* tail;
+		Node<T>* head;
+		Node<T>* tail;
 		int length;
 
 	public:
-  		Double_LL()
+  		DoubleLL()
 		{
 			head = nullptr;
 			tail = nullptr;
@@ -19,7 +20,7 @@ class DoubleLL
 
 		void AddtoHead(T value)
 		{
-			node<T>* temp = new node<T>(value);
+			Node<T>* temp = new Node<T>(value);
 			if (head == nullptr && tail == nullptr)
 			{
 			head = tail = temp;
@@ -35,7 +36,7 @@ class DoubleLL
 
 		void AddtoTail(T value)
 		{
-			node<T>* temp = new node<T>(value);
+			Node<T>* temp = new Node<T>(value);
 			if (head == nullptr && tail == nullptr)
 			{
 			head = tail = temp;
@@ -51,7 +52,7 @@ class DoubleLL
 
 		void Insertat(T value,int pos)
 		{
-			node<T>* temp = new node<T>(value);
+			Node<T>* temp = new Node<T>(value);
 			if(pos >= length)
 			{
 			AddtoTail(value);
@@ -64,7 +65,7 @@ class DoubleLL
 			}
 			else
 			{
-				node<T>* finder = head;
+				Node<T>* finder = head;
 				for(int i = 0; i < pos; i++) finder = finder->next;
 				temp->next = finder->next;
 				if(finder->next) finder->next->prev = temp;
@@ -77,7 +78,7 @@ class DoubleLL
 		void RemoveHead()
 		{
 			if (head == nullptr) exit(-1);
-			node<T>* temp = head;
+			Node<T>* temp = head;
 			head = head->next;
 			head->prev = nullptr;
 			length--;
@@ -87,7 +88,7 @@ class DoubleLL
 		void RemoveTail()
 		{
 			if (tail == nullptr) return;
-			node<T>* temp = tail;
+			Node<T>* temp = tail;
 			tail = tail->prev;
 			tail->next = nullptr;
 			length--;
@@ -96,13 +97,13 @@ class DoubleLL
 
 		void RemoveItem(T value)
 		{
-			node<T>* temp = head;
+			Node<T>* temp = head;
 			if (head == nullptr) return;
 			while (temp != nullptr)
 			{
 				if (temp->data == value)
 				{
-					node<T>* element = temp;
+					Node<T>* element = temp;
 					temp->prev->next = temp->next;
 					temp->next->prev = temp->prev;
 					delete element;
@@ -120,7 +121,7 @@ class DoubleLL
 		{
 			while (head != nullptr)
 			{
-				node<T>* temp = head;
+				Node<T>* temp = head;
 				head = head -> next;
 				delete temp;
 			}
@@ -128,7 +129,7 @@ class DoubleLL
 
 		bool search(T val)
 		{
-			Node* temp = head;
+			Node<T>* temp = head;
 			while (temp) {
 				if (temp->data == val) {
 					return true;
@@ -138,13 +139,13 @@ class DoubleLL
 			return false;
 		}
  
-		~Double_LL()
+		~DoubleLL()
 		{
 			clear();
 		}
 
 		void incrementQuantity(T val) {
-			Node* temp = head;
+			Node<T>* temp = head;
 				while (temp) {
 					if (temp->data == val) {
 						temp->quantity++;
@@ -155,7 +156,7 @@ class DoubleLL
 		}
 
 		void decrementQuantity(T val) {
-			Node* temp = head;
+			Node<T>* temp = head;
 				while (temp) {
 					if (temp->data == val) {
 						temp->quantity--;

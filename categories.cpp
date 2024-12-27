@@ -1,18 +1,9 @@
-#include "categories.h"
-#include "json.hpp"   // For JSON handling using nlohmann::json
-#include <iostream>   // For input/output operations (cin, cout)
-#include <fstream>    // For file operations (ifstream, ofstream)
-#include <set>        // For std::set to store categories
-#include <string>     // For std::string
-#include <vector>     // For std::vector to store product lists
-
-using namespace std;
-using json = nlohmann::json;
+#include "headers/categories.h"
 
 
 Categories::Categories() {
     // Load categories from the file
-    ifstream file("categories.json"); // Open JSON file for reading
+    ifstream file("data/categories.json"); // Open JSON file for reading
     json categoriesJson;             // JSON object to parse data
     if (file.is_open()) {
         file >> categoriesJson; // Read JSON content
@@ -31,6 +22,9 @@ Categories::Categories() {
                 groups.insert(Category(name, productCount, products));
             }
         }
+    }
+    else {
+        groups = {};
     }
 }
 
@@ -55,6 +49,11 @@ void Categories::addCategory(Category c) {
     groups.insert(c); // Add new category to the set
 
     // Save updated categories to the file
+    if (ofstream("data/categories.json")) {
+    cout << "Directory and file exist or can be created." << endl;
+    } else {
+    cout << "Directory or file can't be accessed." << endl;
+    }
     saveCategoriesToFile();
 }
 
@@ -92,7 +91,7 @@ void Categories::saveCategoriesToFile() {
     }
 
     // Write the JSON array to the file
-    ofstream file("categories.json");
+    ofstream file("data/categories.json");
     if (file.is_open()) {
         file << categoriesJson.dump(4); // Pretty-print JSON with 4 spaces of indentation
         file.close();

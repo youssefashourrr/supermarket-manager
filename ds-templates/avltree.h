@@ -1,4 +1,5 @@
 #include "bstnode.h"
+#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -63,7 +64,7 @@ private:
     BSTNode<T>* insert(T val,BSTNode<T>* r)
     {
         if(!r) r = new BSTNode<T>(val);
-        if(r->val == val) return nullptr;
+        if(r->data == val) return nullptr;
         else
         {
             if (r->data < val) r->right = insert(val, r->right);
@@ -118,7 +119,7 @@ private:
 
     BSTNode<T>* search(BSTNode<T>* r, T val)
     {
-        if(r->data == val || r == nullptr) return r;
+        if (r->data == val || r == nullptr) return r;
         else if(val < r->data) return search(r->left, val);
         else return search(r->right, val);
     }
@@ -171,9 +172,9 @@ private:
     void inorder(vector<T> &v, BSTNode<T>* r) const
     {
         if (r == nullptr) return;
-        if (r->left) inorder(v, r->left);
+        inorder(v, r->left);
         v.push_back(r->data);
-        if (r-> right) inorder(v, r->right);
+        inorder(v, r->right);
     }
 
 public:

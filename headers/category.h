@@ -1,4 +1,4 @@
-#include "avltree.h"
+#include "../ds-templates/avltree.h"
 #include "product.h"
 
 
@@ -10,6 +10,7 @@ private:
     int numOfProducts = 0;
 
 public:
+	Category(string);
 	Category(string, int, AvlTree<Product>);
   	void setName(string);
 	AvlTree<Product> getProducts() const;
@@ -17,5 +18,6 @@ public:
 	int getProductCount() const;
 	void addProduct(string, float);
 	void removeProduct(string);
+	bool operator<(const Category&) const;
 	~Category();
 };

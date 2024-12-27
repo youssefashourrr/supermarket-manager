@@ -1,5 +1,8 @@
+#include "../json.hpp" 
 #include <iostream>
 using namespace std;
+
+using json = nlohmann::json;
 
 
 class Product
