@@ -36,14 +36,15 @@ Categories::Categories() {
                 try {
                     string name = categoryJson.at("name");
                     int productCount = categoryJson.at("productCount");
-                    AvlTree<Product> products;
+                    AvlTree<Product>* products;
+                    products = new AvlTree<Product>;
 
                     for (const auto& productJson : categoryJson.at("products")) {
                         Product product(productJson);
-                        products.insert(product);
+                        products->insert(product);
                     }
 
-                    groups.insert(new Category(name, productCount, &products));
+                    groups.insert(new Category(name, productCount, products));
                 } 
                 catch (const std::exception& e) {
                     cout << "Error parsing category or product: " << e.what() << endl;
@@ -85,13 +86,15 @@ set<Category*>::iterator Categories::findCategory(string name) {
     return groups.end();
 }
 
-void Categories::addCategory(Category* c) {
-    if (c == nullptr) {
-        cerr << "Cannot add a null category." << endl;
-        return;
+bool Categories::addCategory(Category* c) {
+    if (c == nullptr) return false;
+    string cName = c->getName();
+    for (const auto c : groups) {
+        if (c->getName() == cName) return false;
     }
     groups.insert(c);
     saveCategoriesToFile();
+    return true;
 }
 
 void Categories::removeCategory(string name) {
@@ -109,7 +112,7 @@ void Categories::saveCategoriesToFile() {
     ofstream outFile("data/categories.json");
     if (outFile.is_open()) {
         json categoriesJson = json::array();
-        for (const auto category : groups) {
+        for (const auto& category : groups) {
             if (category == nullptr) continue;  // Avoid null pointer access
             json categoryJson;
             categoryJson["name"] = category->getName();
@@ -117,7 +120,7 @@ void Categories::saveCategoriesToFile() {
 
             vector<Product> productList = category->getProducts()->AvlTreeAsVector();
             categoryJson["products"] = json::array();
-            for (auto& product : productList) {
+            for (auto product : productList) {
                 categoryJson["products"].push_back(product.toJson());
             }
 
