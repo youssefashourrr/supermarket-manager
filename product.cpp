@@ -107,6 +107,6 @@ bool Product::operator!=(const Product& other) const
 
 ostream& operator<<(ostream& os, const Product& item)
 {
-	os <<"Product: "<< item.name << " " << item.code << endl;
+	os <<"Product: "<< item.name << " " << item.price << " " <<  item.code << endl;
 	return os;
 }

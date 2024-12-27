@@ -1,12 +1,1 @@
-[
-    {
-        "name": "fruits",
-        "productCount": 3,
-        "products": []
-    },
-    {
-        "name": "vegetables",
-        "productCount": 3,
-        "products": []
-    }
-]
+[]

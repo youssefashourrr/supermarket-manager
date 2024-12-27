@@ -16,6 +16,7 @@ class Categories {
     
     public:
         Categories();
+        set<Category> getGroups() const;
         void addCategory(Category);
         void removeCategory(string);
         set<Category>::iterator findCategory(string);

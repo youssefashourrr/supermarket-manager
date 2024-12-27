@@ -28,7 +28,12 @@ Categories::Categories() {
     }
 }
 
-bool Categories::isInCategories(const string& name) const {
+set<Category> Categories::getGroups() const {
+    return groups;
+}
+
+bool Categories::isInCategories(const string &name) const
+{
     // Iterate over the categories in the set
     for (const auto& category : groups) {
         if (category.getName() == name) {
@@ -47,30 +52,25 @@ set<Category>::iterator Categories::findCategory(string name) {
 
 void Categories::addCategory(Category c) {
     groups.insert(c); // Add new category to the set
-
     // Save updated categories to the file
-    if (ofstream("data/categories.json")) {
-    cout << "Directory and file exist or can be created." << endl;
-    } else {
-    cout << "Directory or file can't be accessed." << endl;
-    }
     saveCategoriesToFile();
+    cout << "finished saving" << endl;
 }
 
 void Categories::removeCategory(string name) {
     if (this->isInCategories(name)) {
         auto it = this->findCategory(name); // Find the category
         groups.erase(it);                   // Remove it from the set
-
         // Save updated categories to the file
         saveCategoriesToFile();
     }
 }
 
 void Categories::saveCategoriesToFile() {
+    // Step 1: Create the JSON object for categories
     json categoriesJson = json::array(); // JSON array to hold all categories
 
-    // Iterate through the set of categories
+    // Iterate through the set of categories and build the JSON structure
     for (const auto& category : groups) {
         json categoryJson; // JSON object for a single category
 
@@ -90,11 +90,15 @@ void Categories::saveCategoriesToFile() {
         categoriesJson.push_back(categoryJson);
     }
 
-    // Write the JSON array to the file
-    ofstream file("data/categories.json");
+    // Step 2: Open the file and overwrite its content with the new categories JSON
+    ofstream file("data/categories.json", ios::trunc); // Open in trunc mode to clear file content
     if (file.is_open()) {
-        file << categoriesJson.dump(4); // Pretty-print JSON with 4 spaces of indentation
-        file.close();
+        // Write the categories JSON to the file, pretty-printing with 4 spaces of indentation
+        file << categoriesJson.dump(4);  
+        file.close();  // Close the file after writing
+        cout << "Categories saved successfully to the file." << endl;
+    } 
+    else {
+        cerr << "Failed to open the file for saving categories." << endl;
     }
 }
-
