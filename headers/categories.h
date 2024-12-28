@@ -22,5 +22,5 @@ class Categories {
         void removeCategory(string);
         set<Category*>::iterator findCategory(string);
         bool isInCategories(const string &name) const;
-        void saveCategoriesToFile();
+        void saveToFile();
 };
