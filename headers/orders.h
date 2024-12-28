@@ -1,6 +1,12 @@
+#include <fstream>
+#include <iostream>
 #include <queue>
 #include <vector>
+#include "../json.hpp"
 #include "order.h"
+
+using namespace std;
+using json = nlohmann::json;
 
 
 class Orders
@@ -14,8 +20,10 @@ class Orders
         queue<Order*>* getPending();
         vector<Order*>* getProcessed();
         void addOrder(Order*);
-        void processOrder();
+        bool processOrder();
+        
+        void loadPendingOrders();
+        void loadProcessedOrders();
         void savePendingOrders();
         void saveProcessedOrders();
-
 };

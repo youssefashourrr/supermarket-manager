@@ -13,11 +13,14 @@ public:
 	Category(string);
 	Category(string, int, AvlTree<Product>*);
   	void setName(string);
+
 	AvlTree<Product>* getProducts();
 	string getName() const;
 	int getProductCount() const;
+	
 	void addProduct(string, float);
 	void removeProduct(string);
+
 	bool operator<(const Category&) const;
 	~Category();
 };

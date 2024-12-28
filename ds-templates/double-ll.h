@@ -139,11 +139,6 @@ class DoubleLL
 			}
 			return false;
 		}
- 
-		~DoubleLL()
-		{
-			clear();
-		}
 
 		void incrementQuantity(T val) {
 			Node<T>* temp = head;
@@ -165,7 +160,7 @@ class DoubleLL
 					}
 					temp = temp->next;
 				}
-				if (temp->quantity ==0 ) RemoveItem(val);
+				if (temp->quantity == 0 ) RemoveItem(val);
 		}
 
 		 Node<T>* getHead() {
@@ -174,5 +169,10 @@ class DoubleLL
 
 		Node<T>* getTail() {
 			return tail;
+		}
+
+		~DoubleLL()
+		{
+			clear();
 		}
 };

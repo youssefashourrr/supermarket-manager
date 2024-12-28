@@ -16,7 +16,6 @@ class Product
 		Product(string);
 		Product(string,float,string);
 		Product(const json& productJson);
-		json toJson();
 
 		string getName() const;
 		float getPrice() const;
@@ -27,6 +26,7 @@ class Product
 		void setCode(string);
 
 		Product& getProduct();
+		json toJson();
 		friend ostream& operator<<(ostream& os, const Product&);
 
 		bool operator<(const Product& other) const;

@@ -36,14 +36,11 @@ Categories::Categories() {
                 try {
                     string name = categoryJson.at("name");
                     int productCount = categoryJson.at("productCount");
-                    AvlTree<Product>* products;
-                    products = new AvlTree<Product>;
-
+                    AvlTree<Product>* products = new AvlTree<Product>;
                     for (const auto& productJson : categoryJson.at("products")) {
                         Product product(productJson);
                         products->insert(product);
                     }
-
                     groups.insert(new Category(name, productCount, products));
                 } 
                 catch (const std::exception& e) {
@@ -65,8 +62,8 @@ Categories::~Categories() {
     groups.clear();  // Clear the set after deletion
 }
 
-set<Category*> Categories::getGroups() const {
-    return groups;
+set<Category*>* Categories::getGroups() {
+    return &groups;
 }
 
 bool Categories::isInCategories(const string& name) const {
@@ -131,8 +128,7 @@ void Categories::saveToFile() {
         outFile << categoriesJson.dump(4);
         outFile.close();
         cout << "File has been cleared and categories saved successfully." << endl;
-    } 
-    else {
+    } else {
         cerr << "Failed to open the file for saving categories." << endl;
     }
 }

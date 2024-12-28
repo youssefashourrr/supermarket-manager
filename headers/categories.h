@@ -3,7 +3,6 @@
 #include <iostream>   // For input/output operations (cin, cout)
 #include <fstream>    // For file operations (ifstream, ofstream)
 #include <set>        // For std::set to store categories
-#include <string>     // For std::string
 #include <vector>     // For std::vector to store product lists
 
 using namespace std;
@@ -17,7 +16,7 @@ class Categories {
     public:
         Categories();
         ~Categories();
-        set<Category*> getGroups() const;
+        set<Category*>* getGroups();
         bool addCategory(Category*);
         void removeCategory(string);
         set<Category*>::iterator findCategory(string);

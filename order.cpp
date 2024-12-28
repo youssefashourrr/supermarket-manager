@@ -1,19 +1,15 @@
 #include "headers/order.h"
 
 
-Order::Order(string id, DoubleLL<Product>* checkoutItems)
-{
-    this->id = id;
-    //user declaration (ashour)
-    this->checkoutItems = checkoutItems;
+Order::Order(string buyer, ShoppingCart* checkout) {
+    this->buyer = buyer;
+    this->checkout = checkout;
 }
 
-string Order::getId()
-{
-  return this->id;
+string Order::getBuyer() const {
+    return this->buyer;
 }
 
-DoubleLL<Product>* Order::getItems()
-{
-    return checkoutItems;
+ShoppingCart* Order::getCart() const {
+    return this->checkout;
 }

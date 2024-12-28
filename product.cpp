@@ -8,14 +8,14 @@ using json = nlohmann::json;
 Product::Product()
 {
     this->name = "";
-    this->price = 0.0;
+    this->price = 0;
     this->code = "";
 }
 
 Product::Product(string name)
 {
     this->name = name;
-    this->price = 0.0;
+    this->price = 0;
     this->code = "";
 }
 
@@ -27,9 +27,9 @@ Product::Product(string name, float price, string code)
 }
 
 Product::Product(const json& productJson) {
-	    name = productJson["name"];      // Extract name
-        price = productJson["price"];    // Extract price
-		code = productJson["code"];		// Extract code
+	    this->name = productJson["name"];      // Extract name
+        this->price = productJson["price"];    // Extract price
+		this->code = productJson["code"];		// Extract code
 }
 
 json Product::toJson() {
@@ -42,17 +42,17 @@ json Product::toJson() {
 
 string Product::getName() const
 {
-    return name;
+    return this->name;
 }
 
 float Product::getPrice() const
 {
-	return price;
+	return this->price;
 }
 
 string Product::getCode() const
 {
-	return code;
+	return this->code;
 }
 
 void Product::setName(string name)
@@ -107,6 +107,8 @@ bool Product::operator!=(const Product& other) const
 
 ostream& operator<<(ostream& os, const Product& item)
 {
-	os <<"Product: "<< item.name << " " << item.code << endl;
+	os <<"Product: "<< item.name << endl 
+       << "ID: " << item.code << endl
+       << "Price: " << item.price << endl;
 	return os;
 }

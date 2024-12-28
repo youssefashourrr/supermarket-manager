@@ -1,9 +1,19 @@
 #include "headers/shopping-cart.h"
+#include "shopping-cart.h"
 
 
-ShoppingCart::ShoppingCart() {} // (ashour)
+ShoppingCart::ShoppingCart() {
+    cartItems = new DoubleLL<Product>();
+    this->price = 0;
+}
 
-void ShoppingCart::addItem(const Product &item, int quantity) {
+void ShoppingCart::setPrice(float price) {
+    this->price = price;
+}
+
+void ShoppingCart::addItem(const Product &item, int quantity)
+{
+    this->price += item.getPrice();
     if (cartItems->search(item)) {
         updateQuantity(item, true);
         return;
@@ -11,23 +21,22 @@ void ShoppingCart::addItem(const Product &item, int quantity) {
     cartItems->AddtoTail(item);
 }
 
-void ShoppingCart::removeItem(const Product &item) {
+void ShoppingCart::removeItem(const Product& item) {
+    this->price -= item.getPrice();
     if (cartItems->search(item) == false) return;
-    updateQuantity(item,false);
+    updateQuantity(item, false);
 }
 
 void ShoppingCart::updateQuantity(const Product& item, bool flag) {
-    //if (cartItems->search(item) == false) return;
+    if (cartItems->search(item) == false) return;
     if (flag) cartItems->incrementQuantity(item);
     else cartItems->decrementQuantity(item);
 }
 
-DoubleLL<Product>* ShoppingCart::getCart()
-{
-    return cartItems;
+DoubleLL<Product>* ShoppingCart::getItems() const {
+    return this->cartItems;
 }
 
-Order ShoppingCart::convertToOrder()
-{
-
+float ShoppingCart::getPrice() const {
+    return this->price;
 }
