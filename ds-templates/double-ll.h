@@ -39,13 +39,14 @@ class DoubleLL
 			Node<T>* temp = new Node<T>(value);
 			if (head == nullptr && tail == nullptr)
 			{
-			head = tail = temp;
+				head = tail = temp;
 			}
 			else
 			{
-			temp -> prev = tail;
-			tail->next = temp;
-			tail = temp;
+				temp -> prev = tail;
+				temp->next = nullptr;
+				tail->next = temp;
+				tail = temp;
 			}
 			length++;
 		}
@@ -167,7 +168,7 @@ class DoubleLL
 				if (temp->quantity ==0 ) RemoveItem(val);
 		}
 
-		Node<T>* getHead() {
+		 Node<T>* getHead() {
 			return head;
 		}
 

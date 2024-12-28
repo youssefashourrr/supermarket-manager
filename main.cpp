@@ -1,35 +1,22 @@
-#include "headers/categories.h"
+#include "headers/orders.h"
 #include <iostream>
+#include <queue>
 using namespace std;
 
 
-int main() {
-    Categories manyCs;
-    for (const auto c : manyCs.getGroups()) {
-        cout << c->getName() << endl << c->getProductCount() << endl;
-        vector<Product> productList = c->getProducts()->AvlTreeAsVector();
-        for (auto p : productList) cout << p;
-    }
+int main()
+{
+    DoubleLL<Product> Talab;
+    Product p("Milk",20,"BE-1");
+    Talab.AddtoTail(p);
+    Talab.AddtoTail(Product("Apple Juice",15,"BE-2"));
+    Talab.AddtoTail(Product("Water",5,"BE-3"));
 
-/*     Category* c1;
-    c1 = new Category("fruits");
-    c1->addProduct("apple", 1);
-    c1->addProduct("avocado", 3);
-    c1->addProduct("grapes", 2);
-    c1->addProduct("banana", 5);
 
-    Category* c2;
-    c2 = new Category("vegetables");
-    c2->addProduct("tomato", 5);
-    c2->addProduct("lettuce", 6);
-    c2->addProduct("brocoli", 2);
-    c2->addProduct("onion", 1); */
+    Order* x = new Order("Geo",&Talab);
+    Node<Product>* Talab1 = x->getItems()->getHead();
 
-/*  for (auto p : c2->getProducts().AvlTreeAsVector()) cout << p;
-    for (auto p : c1->getProducts().AvlTreeAsVector()) cout << p; */
-
-/*     manyCs.addCategory(c1);
-    manyCs.addCategory(c2); */
-
+    Orders History;
+    History.addOrder(x);
     return 0;
 }

@@ -1,17 +1,17 @@
-#include <../ds-templates/double-ll.h>
-#include <product.h>
+#include "../ds-templates/double-ll.h"
+#include "product.h"
 // include shopping cart (ashour)
 // include user (ashour)
 
-
-class Order {
+class Order
+{
     private:
         string id;
-        string name;
-        DoubleLL<Product> checkoutItems;
+        DoubleLL<Product>* checkoutItems;
 
     public:
-        Order(string, DoubleLL<Product>);
-        DoubleLL<Product> getItems() const;
+        Order(string, DoubleLL<Product>*);
+        string getId();
+        DoubleLL<Product>* getItems();
         // get user (ashour)
 };
