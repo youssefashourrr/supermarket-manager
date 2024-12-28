@@ -19,9 +19,9 @@ class Product
 		Product(const json& productJson);
 		json toJson();
 
-		string getName();
-		float getPrice();
-		string getCode();
+		string getName() const;
+		float getPrice() const;
+		string getCode() const;
 
 		void setName(string);
 		void setPrice(float);

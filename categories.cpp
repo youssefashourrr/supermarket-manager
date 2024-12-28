@@ -58,6 +58,7 @@ Categories::Categories() {
 }
 
 Categories::~Categories() {
+    saveToFile();
     for (auto category : groups) {
         delete category;  // Free allocated memory
     }
@@ -93,7 +94,7 @@ bool Categories::addCategory(Category* c) {
         if (c->getName() == cName) return false;
     }
     groups.insert(c);
-    saveCategoriesToFile();
+    saveToFile();
     return true;
 }
 
@@ -102,13 +103,13 @@ void Categories::removeCategory(string name) {
     if (it != groups.end()) {
         delete *it;          // Free memory for the removed category
         groups.erase(it);    // Remove from the set
-        saveCategoriesToFile();
+        saveToFile();
     } else {
         cout << "Category '" << name << "' not found, nothing to remove." << endl;
     }
 }
 
-void Categories::saveCategoriesToFile() {
+void Categories::saveToFile() {
     ofstream outFile("data/categories.json");
     if (outFile.is_open()) {
         json categoriesJson = json::array();

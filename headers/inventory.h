@@ -1,9 +1,13 @@
 #define ALERT_THRESHOLD 3
 
+#include <fstream>
 #include <iostream>
 #include <map>
-#include <category.h>
+#include "../json.hpp"
+#include "product.h"
+
 using namespace std;
+using json = nlohmann::json;
 
 
 class Inventory {
@@ -14,9 +18,9 @@ class Inventory {
     public:
         Inventory();
         map<Product, int> getStock() const;
-
         void addProduct(Product);
         void removeProduct(Product);
         void incrementQuantity(Product, int);
         void decrementQuantity(Product, int);
+        void saveToFile();
 };

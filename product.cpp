@@ -40,17 +40,17 @@ json Product::toJson() {
     return productJson;
 }
 
-string Product::getName()
+string Product::getName() const
 {
     return name;
 }
 
-float Product::getPrice()
+float Product::getPrice() const
 {
 	return price;
 }
 
-string Product::getCode()
+string Product::getCode() const
 {
 	return code;
 }
