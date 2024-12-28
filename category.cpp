@@ -4,6 +4,7 @@
 Category::Category(string name)
 {
 	this->name = name;
+  products = new AvlTree<Product>;
 }
 
 Category::Category(string name, int numberOfProducts, AvlTree<Product>* products)
@@ -44,17 +45,17 @@ void Category::addProduct(string item, float price)
 
 void Category::removeProduct(string item)
 {
-  Product p(item, 0.0, "");
-  bool found = products->search(p);
-  if (found) {
-    products->remove(p);
-    numOfProducts--;
-  }
+	Product p(item, 0.0, "");
+	bool found = products->search(p);
+	if (found) {
+		products->remove(p);
+		numOfProducts--;
+	}
 }
 
 bool Category::operator<(const Category& other) const 
 {
-        return name < other.name;
+	return name < other.name;
 }
 
 Category::~Category()
