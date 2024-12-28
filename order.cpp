@@ -7,6 +7,7 @@ Order::Order(string id, DoubleLL<Product> checkoutItems) {
     this->checkoutItems = checkoutItems;
 }
 
-DoubleLL<Product> Order::getItems() const {
+DoubleLL<Product> Order::getItems() const
+{
     return this->checkoutItems;
 }
