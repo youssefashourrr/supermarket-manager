@@ -18,7 +18,7 @@ class Categories {
         ~Categories();
         set<Category*>* getGroups();
         bool addCategory(Category*);
-        void removeCategory(string);
+        bool removeCategory(string);
         set<Category*>::iterator findCategory(string);
         bool isInCategories(const string &name) const;
         void saveToFile();

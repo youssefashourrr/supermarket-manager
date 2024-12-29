@@ -33,22 +33,23 @@ int Category::getProductCount() const{
 	return numOfProducts;
 }
 
-void Category::addProduct(string item, float price)
+string Category::addProduct(string item, float price)
 {
     numOfProducts++;
-    string cat = name.substr(0,2);
+    string cat = name.substr(0,3);
     for(char& c : cat) c = toupper(c);
     cat += "-" + to_string(numOfProducts);
     Product p(item, price, cat);
     products->insert(p);
+    return cat;
 }
 
 void Category::removeProduct(string item)
 {
-	Product p(item, 0.0, "");
-	bool found = products->search(p);
+	Product temp(item, 0.0, "");
+	bool found = products->search(temp);
 	if (found) {
-		products->remove(p);
+		products->remove(temp);
 		numOfProducts--;
 	}
 }

@@ -17,7 +17,7 @@ class Inventory {
 
     public:
         Inventory();
-        map<Product, int> getStock() const;
+        map<Product, int>* getStock();
         void addProduct(Product);
         void removeProduct(Product);
         void incrementQuantity(Product, int);

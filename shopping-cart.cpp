@@ -1,5 +1,4 @@
 #include "headers/shopping-cart.h"
-#include "shopping-cart.h"
 
 
 ShoppingCart::ShoppingCart() {
@@ -11,7 +10,7 @@ void ShoppingCart::setPrice(float price) {
     this->price = price;
 }
 
-void ShoppingCart::addItem(const Product &item, int quantity)
+void ShoppingCart::addItem(const Product& item)
 {
     this->price += item.getPrice();
     if (cartItems->search(item)) {
@@ -33,7 +32,12 @@ void ShoppingCart::updateQuantity(const Product& item, bool flag) {
     else cartItems->decrementQuantity(item);
 }
 
-DoubleLL<Product>* ShoppingCart::getItems() const {
+ShoppingCart* ShoppingCart::getObject() {
+    return this;
+}
+
+DoubleLL<Product> *ShoppingCart::getItems() const
+{
     return this->cartItems;
 }
 

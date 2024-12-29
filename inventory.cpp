@@ -62,8 +62,8 @@ Inventory::Inventory() {
     }
 }
 
-map<Product, int> Inventory::getStock() const {
-    return stock;
+map<Product, int>* Inventory::getStock() {
+    return &(this->stock);
 }
 
 void Inventory::addProduct(Product item) {

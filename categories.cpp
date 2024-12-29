@@ -95,14 +95,16 @@ bool Categories::addCategory(Category* c) {
     return true;
 }
 
-void Categories::removeCategory(string name) {
+bool Categories::removeCategory(string name) {
     auto it = findCategory(name);
     if (it != groups.end()) {
         delete *it;          // Free memory for the removed category
         groups.erase(it);    // Remove from the set
         saveToFile();
+        return true;
     } else {
         cout << "Category '" << name << "' not found, nothing to remove." << endl;
+        return false;
     }
 }
 

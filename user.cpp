@@ -1,4 +1,4 @@
-#include "user.h"
+#include "headers/user.h"
 
 
 User::User() {
@@ -129,4 +129,5 @@ vector<string> User::frequentlyPurchased() const {
             topProducts.push_back(p.first);
         }
     }
+    return topProducts;
 }

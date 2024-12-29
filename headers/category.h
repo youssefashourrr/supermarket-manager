@@ -18,7 +18,7 @@ public:
 	string getName() const;
 	int getProductCount() const;
 	
-	void addProduct(string, float);
+	string addProduct(string, float);
 	void removeProduct(string);
 
 	bool operator<(const Category&) const;
