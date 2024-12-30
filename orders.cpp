@@ -38,7 +38,7 @@ bool Orders::processOrder() {
 }
 
 void Orders::loadPendingOrders() {
-    ifstream pendingFile("data/pending_orders.json", ios::in | ios::ate);
+    ifstream pendingFile("D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/data/pending_orders.json", ios::in | ios::ate);
 
     if (!pendingFile.is_open()) {
         cout << "Failed to open pending orders file. Initializing empty queue." << endl;
@@ -86,7 +86,7 @@ void Orders::loadPendingOrders() {
 }
 
 void Orders::loadProcessedOrders() {
-    ifstream processedFile("data/processed_orders.json",  ios::in | ios::ate);
+    ifstream processedFile("D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/data/processed_orders.json",  ios::in | ios::ate);
 
     if (!processedFile.is_open()) {
         cout << "Failed to open order history file. Initializing empty vector." << endl;
@@ -133,7 +133,7 @@ void Orders::loadProcessedOrders() {
 }
 
 void Orders::savePendingOrders() {
-    ofstream pendingFile("data/pending_orders.json");
+    ofstream pendingFile("D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/data/pending_orders.json");
     if (pendingFile.is_open())
     {
         json pendingJson;
@@ -160,7 +160,7 @@ void Orders::savePendingOrders() {
 }
 
 void Orders::saveProcessedOrders() {
-    ofstream processedFile("data/processed_orders.json");
+    ofstream processedFile("D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/data/processed_orders.json");
     if (processedFile.is_open()) {
         json processedJson;
 

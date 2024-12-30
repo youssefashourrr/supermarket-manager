@@ -14,6 +14,7 @@ class Store {
         User* user;
     
     public:
+        Store();
         Categories* getCategories() const;
         Inventory* getInventory() const;
         Orders* getOrders() const;
@@ -22,7 +23,7 @@ class Store {
         bool addCategory(const string&);
         bool removeCategory(const string&);
 
-        void addProduct(const string&, const string&, float);
+        void addProduct(const string&, const string&, float,int);
         bool removeProduct(const string&);
 
         void addToCart(const Product&);

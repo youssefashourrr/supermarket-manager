@@ -18,9 +18,10 @@ class Inventory {
     public:
         Inventory();
         map<Product, int>* getStock();
-        void addProduct(Product);
+        //void addProduct(Product);
         void removeProduct(Product);
-        void incrementQuantity(Product, int);
+        void addProduct(Product item, int count);
+        //void incrementQuantity(Product, int);
         void decrementQuantity(Product, int);
         void saveToFile();
 };

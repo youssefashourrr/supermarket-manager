@@ -2,8 +2,8 @@
 
 
 Categories::Categories() {
-    groups = {};
-    ifstream file("data/categories.json", ios::in | ios::ate);
+    groups.clear();
+    ifstream file("D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/data/categories.json", ios::in | ios::ate);
     if (!file.is_open()) {
         cout << "Failed to open categories file. Initializing empty categories." << endl;
         return;
@@ -66,18 +66,28 @@ set<Category*>* Categories::getGroups() {
     return &groups;
 }
 
-bool Categories::isInCategories(const string& name) const {
-    for (const auto& category : groups) {
-        if (category != nullptr && category->getName() == name) {
+bool Categories::isInCategories(const string& name) const
+{
+    if (groups.empty()) return false;
+    for (const auto& category : groups)
+        {
+        if (category->getName() == name)
+            {
             return true;
         }
     }
     return false;
 }
 
-set<Category*>::iterator Categories::findCategory(string name) {
-    for (auto it = groups.begin(); it != groups.end(); ++it) {
-        if (*it != nullptr && (*it)->getName() == name) {
+set<Category*>::iterator Categories::findCategory(string name)
+{
+    cout<<name<<endl;
+    for (auto it = groups.begin(); it != groups.end(); ++it)
+        {
+
+        if ((*it)->getName() == name)
+        {
+            //cout<<(*it)->getName()<<endl;
             return it;
         }
     }
@@ -109,7 +119,7 @@ bool Categories::removeCategory(string name) {
 }
 
 void Categories::saveToFile() {
-    ofstream outFile("data/categories.json");
+    ofstream outFile("D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/data/categories.json");
     if (outFile.is_open()) {
         json categoriesJson = json::array();
         for (const auto& category : groups) {

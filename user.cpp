@@ -1,12 +1,14 @@
 #include "headers/user.h"
 
 
-User::User() {
+User::User()
+{
     this->purchaseHistory = {};
 }
 
-bool User::manageRegisterOrLogin(string email, string password) {
-    ifstream file("data/user_profiles.json", ios::in | ios::ate);
+bool User::manageRegisterOrLogin(string email, string password)
+{
+    ifstream file("D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/data/user_profiles.json", ios::in | ios::ate);
     json profilesJson;
 
     if (!file.is_open()) {
@@ -68,7 +70,7 @@ bool User::manageRegisterOrLogin(string email, string password) {
     profilesJson.push_back(newProfile);
 
     // Save the updated profiles back to the file
-    ofstream outFile("data/user_profiles.json", ios::out | ios::trunc);
+    ofstream outFile("D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/data/user_profiles.json", ios::out | ios::trunc);
     if (!outFile.is_open()) {
         cout << "Failed to write to profiles file." << endl;
         return false;

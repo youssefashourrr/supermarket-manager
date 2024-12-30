@@ -4,7 +4,7 @@
 Inventory::Inventory() {
     stock.clear(); // Initialize stock as empty
 
-    ifstream file("data/stock.json", ios::in | ios::ate); // Open the file in read mode
+    ifstream file("D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/data/stock.json", ios::in | ios::ate); // Open the file in read mode
     if (!file.is_open()) {
         cout << "Failed to open stock file. Initializing empty stock." << endl;
         return;
@@ -65,32 +65,25 @@ Inventory::Inventory() {
 map<Product, int>* Inventory::getStock() {
     return &(this->stock);
 }
+//
+// void Inventory::addProduct(Product item) {
+//     if (!stock.count(item)) stock[item]++;
+//     else stock[item] = 1;
+//
+//     if (stock[item] < ALERT_THRESHOLD) alert[item.getName()] = true;
+//     else alert[item.getName()] = false;
+//
+//     saveToFile();
+// }
 
-void Inventory::addProduct(Product item) {
-    if (stock.count(item)) {
-        stock[item]++;
-    } 
-    else {
-        stock[item] = 1;
-    }
-
-    if (stock[item] < ALERT_THRESHOLD) {
-        alert[item.getName()] = true;
-    } 
-    else {
-        alert[item.getName()] = false;
-    }
-
-    saveToFile();
-}
-
-void Inventory::removeProduct(Product item) {
+void Inventory::removeProduct(Product item)
+{
     stock.erase(item);
     alert.erase(item.getName());
     saveToFile();
 }
 
-void Inventory::incrementQuantity(Product item, int count) {
+void Inventory::addProduct(Product item, int count) {
     stock[item] += count;
 
     if (stock[item] < ALERT_THRESHOLD) {
@@ -132,7 +125,7 @@ void Inventory::saveToFile() {
         stockJson.push_back(productJson); // Add product JSON to the array
     }
 
-    ofstream file("data/stock.json"); // Open the file for writing
+    ofstream file("D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/data/stock.json"); // Open the file for writing
     if (!file.is_open()) {
         cout << "Failed to open stock file for saving." << endl;
         return;

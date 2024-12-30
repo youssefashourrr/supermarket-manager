@@ -1,5 +1,14 @@
 #include "headers/store.h"
 
+Store::Store()
+{
+    this->categories = new Categories;
+    this->inventory= new Inventory;
+    this->shoppingCart= new ShoppingCart;
+    this->orders=new Orders;
+    this->user=new User;
+}
+
 
 Categories* Store::getCategories() const {
     return this->categories;
@@ -17,9 +26,9 @@ User* Store::getUser() const {
     return this->user;
 }
 
-bool Store::addCategory(const string& name) {
+bool Store::addCategory(const string& name)
+{
     if (this->categories->isInCategories(name)) return false;
-
     Category* category = new Category(name);
     this->categories->addCategory(category);
     return true;
@@ -36,10 +45,11 @@ bool Store::removeCategory(const string& name) {
     return categories->removeCategory(name);
 }
 
-void Store::addProduct(const string& cName, const string& pName, float price) {
+void Store::addProduct(const string& cName, const string& pName, float price,int quantity) {
     auto it = categories->findCategory(cName);
     string id = (*it)->addProduct(pName, price);
-    this->inventory->addProduct((pName, price, id));
+    this->categories->saveToFile();
+    this->inventory->addProduct(Product(pName, price, id),quantity);
 }
 
 bool Store::removeProduct(const string& name) {

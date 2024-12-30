@@ -4,7 +4,8 @@
 Category::Category(string name)
 {
 	this->name = name;
-  products = new AvlTree<Product>;
+	products = new AvlTree<Product>;
+	this->numOfProducts = 0;
 }
 
 Category::Category(string name, int numberOfProducts, AvlTree<Product>* products)

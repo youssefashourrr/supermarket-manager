@@ -19,7 +19,9 @@ private:
         BSTNode<T>* newRoot = r->left;
         r->left = newRoot->right;
         newRoot->right = r;
-
+           // 5
+        ////3
+        //
         r->height = 1 + max(height(r->left), height(r->right));
         newRoot->height = 1 + max(height(newRoot->left), height(newRoot->right));
 
@@ -38,7 +40,8 @@ private:
         return newRoot;
     }
 
-    BSTNode<T>* BalanceAVL(BSTNode<T>* r) {
+    BSTNode<T>* BalanceAVL(BSTNode<T>* r)
+    {
         if (r == nullptr) return nullptr;
         int balance = height(r->left) - height(r->right);
 
