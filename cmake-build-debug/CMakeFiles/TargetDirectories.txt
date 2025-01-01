@@ -1,3 +1,0 @@
-D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/cmake-build-debug/CMakeFiles/supermarket_manager.dir
-D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/cmake-build-debug/CMakeFiles/rebuild_cache.dir
