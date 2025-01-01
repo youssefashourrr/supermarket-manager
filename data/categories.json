@@ -1,0 +1,60 @@
+[
+    {
+        "name": "Snacks",
+        "productCount": 1,
+        "products": [
+            {
+                "code": "SNA-1",
+                "name": "Snickers",
+                "price": 50.0
+            }
+        ]
+    },
+    {
+        "name": "Meat",
+        "productCount": 0,
+        "products": []
+    },
+    {
+        "name": "Bakery",
+        "productCount": 0,
+        "products": []
+    },
+    {
+        "name": "Diary",
+        "productCount": 0,
+        "products": []
+    },
+    {
+        "name": "Fruits",
+        "productCount": 2,
+        "products": [
+            {
+                "code": "FRU-2",
+                "name": "Apple",
+                "price": 10.0
+            },
+            {
+                "code": "FRU-3",
+                "name": "Avocado",
+                "price": 70.0
+            }
+        ]
+    },
+    {
+        "name": "Beverages",
+        "productCount": 1,
+        "products": [
+            {
+                "code": "BEV-1",
+                "name": "Coffe Shake",
+                "price": 20.0
+            }
+        ]
+    },
+    {
+        "name": "Vegetables",
+        "productCount": 0,
+        "products": []
+    }
+]

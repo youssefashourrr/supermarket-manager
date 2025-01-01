@@ -17,6 +17,7 @@ class Store {
         Store();
         Categories* getCategories() const;
         Inventory* getInventory() const;
+        ShoppingCart* getShoppingCart() const;
         Orders* getOrders() const;
         User* getUser() const;
 
@@ -27,6 +28,7 @@ class Store {
         bool removeProduct(const string&);
 
         void addToCart(const Product&);
+        void removeToCart(const Product&);
 
         vector<Order*> getPendingQueue();
         void checkout();

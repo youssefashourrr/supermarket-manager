@@ -18,6 +18,7 @@ class Inventory {
     public:
         Inventory();
         map<Product, int>* getStock();
+        map<string, bool>* getAlert();
         //void addProduct(Product);
         void removeProduct(Product);
         void addProduct(Product item, int count);

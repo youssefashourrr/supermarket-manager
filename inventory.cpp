@@ -62,8 +62,14 @@ Inventory::Inventory() {
     }
 }
 
-map<Product, int>* Inventory::getStock() {
+map<Product, int>* Inventory::getStock()
+{
     return &(this->stock);
+}
+
+map<string, bool>* Inventory::getAlert()
+{
+    return &(this->alert);
 }
 //
 // void Inventory::addProduct(Product item) {
@@ -111,17 +117,20 @@ void Inventory::decrementQuantity(Product item, int count) {
     saveToFile();
 }
 
-void Inventory::saveToFile() {
+void Inventory::saveToFile()
+{
     json stockJson = json::array(); // Create a JSON array for stock
 
     // Serialize stock into the JSON array
     for (const auto& pair : stock) {
         json productJson;
-        productJson["name"] = pair.first.getName();   // Product name
-        productJson["id"] = pair.first.getCode();     // Product ID
-        productJson["price"] = pair.first.getPrice(); // Product price
-        productJson["quantity"] = pair.second;        // Product quantity
-
+        if (pair.second)
+        {
+            productJson["name"] = pair.first.getName();   // Product name
+            productJson["id"] = pair.first.getCode();     // Product ID
+            productJson["price"] = pair.first.getPrice(); // Product price
+            productJson["quantity"] = pair.second;        // Product quantity
+        }
         stockJson.push_back(productJson); // Add product JSON to the array
     }
 

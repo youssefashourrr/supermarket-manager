@@ -9,13 +9,17 @@ Store::Store()
     this->user=new User;
 }
 
-
 Categories* Store::getCategories() const {
     return this->categories;
 }
 
 Inventory* Store::getInventory() const {
     return this->inventory;
+}
+
+ShoppingCart* Store::getShoppingCart() const
+{
+    return this->shoppingCart;
 }
 
 Orders* Store::getOrders() const {
@@ -38,6 +42,7 @@ bool Store::removeCategory(const string& name) {
     if (!this->categories->isInCategories(name)) return false;
 
     string identifier = name.substr(0, 3);
+    for (auto& i : identifier) i = toupper(i);
     auto stock = this->inventory->getStock();
     for (auto kv : *stock) {
         if (kv.first.getCode().substr(0,3) == identifier) inventory->removeProduct(kv.first);
@@ -52,25 +57,41 @@ void Store::addProduct(const string& cName, const string& pName, float price,int
     this->inventory->addProduct(Product(pName, price, id),quantity);
 }
 
-bool Store::removeProduct(const string& name) {
+bool Store::removeProduct(const string& name)
+{
     string categoryStart;
-    for (const auto& p : *(this->inventory->getStock())) {
-        if (p.first.getName() == name) {
-            categoryStart = p.first.getCode();
-            this->inventory->removeProduct((p.first));
+    for (const auto& p : *(this->inventory->getStock()))
+        {
+            if (p.first.getName() == name)
+                {
+                categoryStart = p.first.getCode();
+                this->inventory->removeProduct(p.first);
+                break;
+                }
         }
-    }
-    for (const auto& c : *(this->categories->getGroups())) {
-        if (c->getName().substr(0, 3) == categoryStart) {
-            c->removeProduct(name);
-            return true;
-        }
+    cout<<"Saved In Inventory";
+    for (const auto& c : *(this->categories->getGroups()))
+        {
+            cout<<c->getName()<<endl;
+            string cname = c->getName().substr(0, 3);
+            for (auto& l:cname) l=toupper(l);
+            if (cname == categoryStart.substr(0,3))
+            {
+                c->removeProduct(name);
+                this->categories->saveToFile();
+                return true;
+            }
     }
     return false;
 }
 
 void Store::addToCart(const Product& added) {
     this->shoppingCart->addItem(added);
+}
+
+void Store::removeToCart(const Product& removed)
+{
+    this->shoppingCart->removeItem(removed);
 }
 
 vector<Order*> Store::getPendingQueue() {

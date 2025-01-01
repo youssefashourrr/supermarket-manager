@@ -1,0 +1,24 @@
+[
+    {
+        "name": "fruits",
+        "productCount": 3,
+        "products": [
+            {
+                "code": "FR-3",
+                "name": "banana",
+                "price": 7.699999809265137
+            }
+        ]
+    },
+    {
+        "name": "vegetables",
+        "productCount": 4,
+        "products": [
+            {
+                "code": "VE-2",
+                "name": "cucumber",
+                "price": 2.9000000953674316
+            }
+        ]
+    }
+]

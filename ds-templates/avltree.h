@@ -10,7 +10,8 @@ class AvlTree {
 private:
     BSTNode<T>* root;
 
-    int height(BSTNode<T>* r) {
+    int height(BSTNode<T>* r)
+    {
         return r ? r->height : 0;
     }
 
