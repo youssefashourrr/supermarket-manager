@@ -1,21 +1,9 @@
 [
     {
-        "id": "FRU-2",
-        "name": "Apple",
-        "price": 10.0,
-        "quantity": 3
-    },
-    {
         "id": "FRU-3",
         "name": "Avocado",
         "price": 70.0,
         "quantity": 12
-    },
-    {
-        "id": "BEV-1",
-        "name": "Coffe Shake",
-        "price": 20.0,
-        "quantity": 100
     },
     {
         "id": "SNA-1",
