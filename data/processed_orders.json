@@ -1,0 +1,110 @@
+[
+    {
+        "email": "Patrickblb@gmail.com",
+        "items": [
+            {
+                "code": "BEV-1",
+                "name": "Water 0.6L ",
+                "price": 6.0,
+                "quantity": 6
+            }
+        ],
+        "price": 36.0
+    },
+    {
+        "email": "Patrickblb@gmail.com",
+        "items": [
+            {
+                "code": "VEG-1",
+                "name": "Avocado",
+                "price": 70.0,
+                "quantity": 7
+            }
+        ],
+        "price": 490.0
+    },
+    {
+        "email": "a@gmail.com",
+        "items": [
+            {
+                "code": "FRU-1",
+                "name": "Apple",
+                "price": 40.0,
+                "quantity": 5
+            }
+        ],
+        "price": 200.0
+    },
+    {
+        "email": "Patrickblb@gmail.com",
+        "items": [
+            {
+                "code": "SNA-1",
+                "name": "Corona Milk Chocolate",
+                "price": 25.0,
+                "quantity": 6
+            }
+        ],
+        "price": 150.0
+    },
+    {
+        "email": "Patrickblb@gmail.com",
+        "items": [
+            {
+                "code": "BEV-1",
+                "name": "Water 0.6L ",
+                "price": 6.0,
+                "quantity": 3
+            },
+            {
+                "code": "DAI-1",
+                "name": "Yogurt",
+                "price": 24.0,
+                "quantity": 2
+            },
+            {
+                "code": "SNA-1",
+                "name": "Corona Milk Chocolate",
+                "price": 25.0,
+                "quantity": 2
+            },
+            {
+                "code": "FRU-1",
+                "name": "Apple",
+                "price": 40.0,
+                "quantity": 2
+            }
+        ],
+        "price": 196.0
+    },
+    {
+        "email": "Patrickblb@gmail.com",
+        "items": [
+            {
+                "code": "DAI-1",
+                "name": "Yogurt",
+                "price": 24.0,
+                "quantity": 7
+            },
+            {
+                "code": "BEV-1",
+                "name": "Water 0.6L ",
+                "price": 6.0,
+                "quantity": 1
+            },
+            {
+                "code": "SNA-1",
+                "name": "Corona Milk Chocolate",
+                "price": 25.0,
+                "quantity": 1
+            },
+            {
+                "code": "FRU-1",
+                "name": "Apple",
+                "price": 40.0,
+                "quantity": 3
+            }
+        ],
+        "price": 319.0
+    }
+]

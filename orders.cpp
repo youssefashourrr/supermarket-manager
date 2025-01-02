@@ -38,6 +38,7 @@ bool Orders::processOrder() {
 }
 
 void Orders::loadPendingOrders() {
+    pendingQ = queue<Order*>();
     ifstream pendingFile("D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/data/pending_orders.json", ios::in | ios::ate);
 
     if (!pendingFile.is_open()) {
@@ -55,7 +56,7 @@ void Orders::loadPendingOrders() {
     try {
         pendingFile >> pendingJson;
         if (pendingJson.is_null()) return;
-    } 
+    }
     catch (const std::exception& e) {
         cout << "Error parsing JSON: " << e.what() << endl;
         pendingFile.close();
@@ -66,25 +67,26 @@ void Orders::loadPendingOrders() {
     if (pendingJson.is_array()) {
         if (pendingJson.empty()) {
             cout << "Pending orders file contains an empty array ([])." << endl;
-        } 
+        }
         else {
             for (const auto& orderData : pendingJson) {
                 string buyer = orderData["email"];
                 ShoppingCart* cart = new ShoppingCart();;
                 for (const auto& item : orderData["items"]) {
-                    cart->getItems()->AddtoTail(Product(item));
+                    Product product(item["name"], item["price"], item["code"]);
+                    cart->getItems()->AddtoTail(product);
+                    cart->getItems()->getTail()->quantity = item["quantity"];
                 }
                 cart->setPrice(orderData["price"]);
                 Order* order =  new Order(buyer, cart);
                 pendingQ.push(order);
             }
         }
-    } 
+    }
     else {
         cout << "Pending file is malformed or not a valid JSON array." << endl;
     }
 }
-
 void Orders::loadProcessedOrders() {
     ifstream processedFile("D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/data/processed_orders.json",  ios::in | ios::ate);
 
@@ -102,7 +104,7 @@ void Orders::loadProcessedOrders() {
     json processedJson;
     try {
         processedFile >> processedJson;
-    } 
+    }
     catch (const std::exception& e) {
         cout << "Error parsing JSON: " << e.what() << endl;
         processedFile.close();
@@ -113,26 +115,29 @@ void Orders::loadProcessedOrders() {
     if (processedJson.is_array()) {
         if (processedJson.empty()) {
             cout << "Processed orders file contains an empty array ([])." << endl;
-        } 
+        }
         else {
             for (const auto& orderData : processedJson) {
                 string buyer = orderData["email"];
                 ShoppingCart* cart = new ShoppingCart();;
-                for (const auto& item : orderData["items"]) {
-                    cart->getItems()->AddtoTail(Product(item));
+                for (const auto& item : orderData["items"])
+                {
+                    Product product(item["name"], item["price"], item["code"]);
+                    cart->getItems()->AddtoTail(product);
+                    cart->getItems()->getTail()->quantity = item["quantity"];
                 }
                 cart->setPrice(orderData["price"]);
                 Order* order =  new Order(buyer, cart);
                 processed.push_back(order);
             }
         }
-    } 
+    }
     else {
         cout << "Processed file is malformed or not a valid JSON array." << endl;
     }
 }
-
-void Orders::savePendingOrders() {
+void Orders::savePendingOrders()
+{
     ofstream pendingFile("D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/data/pending_orders.json");
     if (pendingFile.is_open())
     {
@@ -146,9 +151,11 @@ void Orders::savePendingOrders() {
             orderJson["email"] = order->getBuyer();
             orderJson["price"] = order->getCart()->getPrice();
             Node<Product>* temp = order->getCart()->getItems()->getHead();
-            orderJson["items"];
+            orderJson["items"] = json::array();
             while (temp != nullptr) {
-                orderJson["items"].push_back(temp->data.toJson());
+                json productJson = temp->data.toJson();
+                productJson["quantity"] = temp->quantity;
+                orderJson["items"].push_back(productJson);
                 temp = temp->next;
             }
             pendingJson.push_back(orderJson);
@@ -156,10 +163,9 @@ void Orders::savePendingOrders() {
 
         pendingFile << pendingJson.dump(4);  // Pretty print JSON with 4 spaces of indentation
     }
-    cout<<"Saved Queue Successfully"<<endl;
 }
-
-void Orders::saveProcessedOrders() {
+void Orders::saveProcessedOrders()
+{
     ofstream processedFile("D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/data/processed_orders.json");
     if (processedFile.is_open()) {
         json processedJson;
@@ -170,9 +176,12 @@ void Orders::saveProcessedOrders() {
             orderJson["email"] = order->getBuyer();
             orderJson["price"] = order->getCart()->getPrice();
             Node<Product>* temp = order->getCart()->getItems()->getHead();
-            orderJson["items"];
-            while (temp != nullptr) {
-                orderJson["items"].push_back(temp->data.toJson());
+            orderJson["items"] = json::array();
+            while (temp != nullptr)
+            {
+                json productJson = temp->data.toJson();
+                productJson["quantity"] = temp->quantity;
+                orderJson["items"].push_back(productJson);
                 temp = temp->next;
             }
             processedJson.push_back(orderJson);

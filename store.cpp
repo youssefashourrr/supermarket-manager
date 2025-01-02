@@ -42,11 +42,21 @@ bool Store::removeCategory(const string& name) {
     if (!this->categories->isInCategories(name)) return false;
 
     string identifier = name.substr(0, 3);
+
     for (auto& i : identifier) i = toupper(i);
     auto stock = this->inventory->getStock();
-    for (auto kv : *stock) {
-        if (kv.first.getCode().substr(0,3) == identifier) inventory->removeProduct(kv.first);
+    for (auto it = stock->begin(); it != stock->end();)
+    {
+        if (it->first.getCode().substr(0, 3) == identifier)
+        {
+            it = inventory->removeProduct(it->first); // Safely remove and advance the iterator
+        }
+        else
+        {
+            ++it; // Advance the iterator if no removal
+        }
     }
+    cout << name<< endl;
     return categories->removeCategory(name);
 }
 
@@ -89,7 +99,7 @@ void Store::addToCart(const Product& added) {
     this->shoppingCart->addItem(added);
 }
 
-void Store::removeToCart(const Product& removed)
+void Store::removeFromCart(const Product& removed)
 {
     this->shoppingCart->removeItem(removed);
 }
@@ -107,7 +117,14 @@ vector<Order*> Store::getPendingQueue() {
 void Store::checkout() {
     Order* order = new Order(this->user->getEmail(), this->shoppingCart->getObject());
     this->orders->addOrder(order);
+    Node<Product>* ptr = this->shoppingCart->getItems()->getHead();
+    while (ptr != nullptr) {
+        (*this->user->getHistory())[ptr->data.getName()] = ptr->quantity;
+        ptr = ptr->next;
+    }
+    this->user->savePurchases();
 }
+
 
 unordered_map<Order*, bool> Store::getUserHistory() const {
     unordered_map<Order*, bool> userHistory;
@@ -134,4 +151,20 @@ bool Store::enterStore(const string& email, const string& password) {
     if (!regex_match(password, passwordPattern)) return false;
 
     return this->user->manageRegisterOrLogin(email, password);
+}
+
+bool Store::checkOrderValidity() {
+    Node<Product>* itemPtr = this->orders->getPending()->front()->getCart()->getItems()->getHead();
+    map<Product, int>* stockPtr = this->getInventory()->getStock();
+    map<string,bool>* alertPtr = this->getInventory()->getAlert();
+    while (itemPtr != nullptr)
+    {
+        int q = itemPtr->quantity;
+        if ((*stockPtr)[itemPtr->data] < q || (*alertPtr)[itemPtr->data.getName()]) return false;
+        this->inventory->decrementQuantity(itemPtr->data, q);
+        itemPtr = itemPtr->next;
+    }
+    this->orders->processOrder();
+    return true;
+
 }

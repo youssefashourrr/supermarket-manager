@@ -112,7 +112,8 @@ bool Categories::removeCategory(string name) {
         groups.erase(it);    // Remove from the set
         saveToFile();
         return true;
-    } else {
+    } else
+        {
         cout << "Category '" << name << "' not found, nothing to remove." << endl;
         return false;
     }

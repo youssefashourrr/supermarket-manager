@@ -96,22 +96,51 @@ class DoubleLL
 			delete temp;
 		}
 
-		void RemoveItem(T value)
-		{
-			Node<T>* temp = head;
-			if (head == nullptr) return;
-			while (temp != nullptr)
-			{
-				if (temp->data == value)
-				{
-					Node<T>* element = temp;
-					temp->prev->next = temp->next;
-					temp->next->prev = temp->prev;
-					delete element;
-					length--;
-				}
-			}
-		}
+	void RemoveItem(T value)
+  		{
+  			Node<T>* temp = head;
+  			if (head == nullptr) return; // List is empty
+
+  			while (temp != nullptr)
+  			{
+  				if (temp->data == value)
+  				{
+  					Node<T>* element = temp;
+
+  					// Update head and tail if needed
+  					if (temp == head)
+  					{
+  						head = temp->next;
+  						if (head != nullptr) head->prev = nullptr;
+  					}
+  					else if (temp == tail)
+  					{
+  						tail = temp->prev;
+  						if (tail != nullptr) tail->next = nullptr;
+  					}
+  					else
+  					{
+  						// General case
+  						temp->prev->next = temp->next;
+  						temp->next->prev = temp->prev;
+  					}
+
+  					// Move to the next node before deletion
+  					temp = temp->next;
+
+  					// Delete the current node
+  					delete element;
+  					length--;
+  				}
+  				else
+  				{
+  					// Move to the next node if no deletion
+  					temp = temp->next;
+  				}
+  			}
+  		}
+
+
 
 		bool isEmpty() const
 		{

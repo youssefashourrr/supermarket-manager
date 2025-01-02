@@ -1,12 +1,37 @@
 [
     {
+        "email": "pierreblb3@gmail.com",
+        "password": "Ilovearsenal!1",
+        "purchaseHistory": {}
+    },
+    {
+        "email": "CoachAshour@gmail.com",
+        "password": "1!Ashour",
+        "purchaseHistory": {}
+    },
+    {
+        "email": "AhmedYasser@gmail.com",
+        "password": "A1!Yasser",
+        "purchaseHistory": {}
+    },
+    {
+        "email": "test@gmail.com",
+        "password": "Test@!12",
+        "purchaseHistory": {}
+    },
+    {
         "email": "Patrickblb@gmail.com",
         "password": "1!Patrick",
         "purchaseHistory": {}
     },
     {
-        "email": "pierreblb3@gmail.com",
-        "password": "Ilovearsenal!1",
+        "email": "a@gmail.com",
+        "password": "Aaaaaa@12",
+        "purchaseHistory": {}
+    },
+    {
+        "email": "Patrickblb05@gmail.com",
+        "password": "1!Patrick",
         "purchaseHistory": {}
     }
 ]

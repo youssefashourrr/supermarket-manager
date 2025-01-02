@@ -1,14 +1,44 @@
 [
     {
-        "id": "FRU-3",
+        "id": "FRU-1",
+        "name": "Apple",
+        "price": 40.0,
+        "quantity": 89
+    },
+    {
+        "id": "VEG-1",
         "name": "Avocado",
         "price": 70.0,
-        "quantity": 12
+        "quantity": 93
+    },
+    {
+        "id": "MEA-1",
+        "name": "Chicken Wings",
+        "price": 210.0,
+        "quantity": 99
     },
     {
         "id": "SNA-1",
-        "name": "Snickers",
-        "price": 50.0,
+        "name": "Corona Milk Chocolate",
+        "price": 25.0,
+        "quantity": 91
+    },
+    {
+        "id": "FRU-2",
+        "name": "Mango",
+        "price": 70.0,
         "quantity": 100
+    },
+    {
+        "id": "BEV-1",
+        "name": "Water 0.6L ",
+        "price": 6.0,
+        "quantity": 88
+    },
+    {
+        "id": "DAI-1",
+        "name": "Yogurt",
+        "price": 24.0,
+        "quantity": 90
     }
 ]

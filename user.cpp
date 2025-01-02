@@ -35,16 +35,15 @@ bool User::manageRegisterOrLogin(string email, string password)
     // Check if the email exists in the profiles
     for (const auto& profileJson : profilesJson) {
         try {
-            if (profileJson.at("email") == email) {
+            if (profileJson.at("email") == email)
+            {
                 // Check if the password matches
                 if (profileJson.at("password") != password) {
                     cout << "Password does not match for email" << endl;
                     return false;
                 }
-
                 this->email = email;
                 this->password = password;
-
                 // Copy purchase history
                 if (profileJson.contains("purchaseHistory") && profileJson.at("purchaseHistory").is_object()) {
                     for (const auto& [productName, quantity] : profileJson.at("purchaseHistory").items()) {
@@ -60,7 +59,8 @@ bool User::manageRegisterOrLogin(string email, string password)
             cout << "Error processing profile: " << e.what() << endl;
         }
     }
-
+    this->email = email;
+    this->password = password;
     // If email not found, add new profile
     json newProfile = {
         {"email", email},
@@ -132,4 +132,8 @@ vector<string> User::frequentlyPurchased() const {
         }
     }
     return topProducts;
+}
+
+unordered_map<string, int>* User::getHistory() {
+    return &(this->purchaseHistory);
 }

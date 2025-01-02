@@ -1,34 +1,47 @@
 [
     {
-        "name": "Fruits",
+        "name": "Beverages",
+        "productCount": 2,
+        "products": [
+            {
+                "code": "BEV-1",
+                "name": "Water 0.6L ",
+                "price": 6.0
+            }
+        ]
+    },
+    {
+        "name": "Dairy",
         "productCount": 1,
         "products": [
             {
-                "code": "FRU-3",
+                "code": "DAI-1",
+                "name": "Yogurt",
+                "price": 24.0
+            }
+        ]
+    },
+    {
+        "name": "Vegetables",
+        "productCount": 1,
+        "products": [
+            {
+                "code": "VEG-1",
                 "name": "Avocado",
                 "price": 70.0
             }
         ]
     },
     {
-        "name": "Beverages",
-        "productCount": 0,
-        "products": []
-    },
-    {
-        "name": "Meat",
-        "productCount": 0,
-        "products": []
-    },
-    {
-        "name": "Diary",
-        "productCount": 0,
-        "products": []
-    },
-    {
-        "name": "Bakery",
-        "productCount": 0,
-        "products": []
+        "name": "Meats",
+        "productCount": 2,
+        "products": [
+            {
+                "code": "MEA-1",
+                "name": "Chicken Wings",
+                "price": 210.0
+            }
+        ]
     },
     {
         "name": "Snacks",
@@ -36,14 +49,25 @@
         "products": [
             {
                 "code": "SNA-1",
-                "name": "Snickers",
-                "price": 50.0
+                "name": "Corona Milk Chocolate",
+                "price": 25.0
             }
         ]
     },
     {
-        "name": "Vegetables",
-        "productCount": 0,
-        "products": []
+        "name": "Fruits",
+        "productCount": 2,
+        "products": [
+            {
+                "code": "FRU-1",
+                "name": "Apple",
+                "price": 40.0
+            },
+            {
+                "code": "FRU-2",
+                "name": "Mango",
+                "price": 70.0
+            }
+        ]
     }
 ]

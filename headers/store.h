@@ -28,9 +28,10 @@ class Store {
         bool removeProduct(const string&);
 
         void addToCart(const Product&);
-        void removeToCart(const Product&);
+        void removeFromCart(const Product&);
 
         vector<Order*> getPendingQueue();
+        bool checkOrderValidity();
         void checkout();
         unordered_map<Order*, bool> getUserHistory() const;
         bool enterStore(const string&, const string&);

@@ -82,11 +82,18 @@ map<string, bool>* Inventory::getAlert()
 //     saveToFile();
 // }
 
-void Inventory::removeProduct(Product item)
+map<Product, int>::iterator Inventory::removeProduct(Product item)
 {
-    stock.erase(item);
-    alert.erase(item.getName());
-    saveToFile();
+    auto it = stock.find(item); // Find the item in the map
+    if (it != stock.end())
+    {
+        // Remove the element
+        auto nextIt = stock.erase(it);
+        alert.erase(item.getName()); // Remove from alert system
+        saveToFile();                // Save changes to file
+        return nextIt;               // Return iterator to next element
+    }
+    return stock.end(); // If item wasn't found, return end()
 }
 
 void Inventory::addProduct(Product item, int count) {

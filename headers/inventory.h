@@ -20,7 +20,7 @@ class Inventory {
         map<Product, int>* getStock();
         map<string, bool>* getAlert();
         //void addProduct(Product);
-        void removeProduct(Product);
+        map<Product,int>::iterator removeProduct(Product);
         void addProduct(Product item, int count);
         //void incrementQuantity(Product, int);
         void decrementQuantity(Product, int);

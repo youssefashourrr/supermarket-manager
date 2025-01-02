@@ -17,6 +17,7 @@ class User {
     public:
         User();
         bool manageRegisterOrLogin(string, string);
+        unordered_map<string, int>* getHistory();
         void savePurchases();
         string getEmail() const;
         vector<string> frequentlyPurchased() const;
