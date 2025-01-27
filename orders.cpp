@@ -161,7 +161,7 @@ void Orders::savePendingOrders()
             pendingJson.push_back(orderJson);
         }
 
-        pendingFile << pendingJson.dump(4);  // Pretty print JSON with 4 spaces of indentation
+        pendingFile << pendingJson.dump(4);
     }
 }
 void Orders::saveProcessedOrders()
@@ -187,6 +187,6 @@ void Orders::saveProcessedOrders()
             processedJson.push_back(orderJson);
         }
 
-        processedFile << processedJson.dump(4);  // Pretty print JSON with 4 spaces of indentation
+        processedFile << processedJson.dump(4);
     }
 }

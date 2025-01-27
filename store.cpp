@@ -125,7 +125,6 @@ void Store::checkout() {
     this->user->savePurchases();
 }
 
-
 unordered_map<Order*, bool> Store::getUserHistory() const {
     unordered_map<Order*, bool> userHistory;
     for (const auto& o : *(this->orders->getProcessed())) {

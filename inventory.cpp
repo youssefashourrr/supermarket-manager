@@ -45,6 +45,7 @@ Inventory::Inventory() {
 
             // Create a Product and insert it into the stock map
             Product product(name, price, id);
+            //ProductTrie.insert(name);
             stock[product] = quantity;
         } 
         catch (const std::exception& e) {
@@ -93,6 +94,7 @@ map<Product, int>::iterator Inventory::removeProduct(Product item)
         saveToFile();                // Save changes to file
         return nextIt;               // Return iterator to next element
     }
+    ProductTrie.remove(item.getName());
     return stock.end(); // If item wasn't found, return end()
 }
 
@@ -104,7 +106,7 @@ void Inventory::addProduct(Product item, int count) {
     } else {
         alert[item.getName()] = false;
     }
-
+    ProductTrie.insert(item.getName());
     saveToFile();
 }
 
@@ -122,6 +124,10 @@ void Inventory::decrementQuantity(Product item, int count) {
     }
 
     saveToFile();
+}
+vector<string> Inventory::SearchProduct(const string &prefix)
+{
+    return ProductTrie.autocomplete(prefix);
 }
 
 void Inventory::saveToFile()

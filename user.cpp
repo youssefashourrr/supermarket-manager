@@ -13,11 +13,11 @@ bool User::manageRegisterOrLogin(string email, string password)
 
     if (!file.is_open()) {
         cout << "Failed to open profiles file. Initializing empty profiles." << endl;
-        profilesJson = json::array(); // Initialize an empty JSON array if file cannot be read
+        profilesJson = json::array();
     } 
     else if (file.tellg() == 0) {
         cout << "Profiles file is completely empty." << endl;
-        profilesJson = json::array(); // Initialize an empty JSON array for an empty file
+        profilesJson = json::array();
     } 
     else {
         file.seekg(0);
@@ -75,7 +75,7 @@ bool User::manageRegisterOrLogin(string email, string password)
         cout << "Failed to write to profiles file." << endl;
         return false;
     }
-    outFile << profilesJson.dump(4); // Pretty-print with indentation
+    outFile << profilesJson.dump(4);
     outFile.close();
 
     cout << "New user registered with email: " << email << endl;
