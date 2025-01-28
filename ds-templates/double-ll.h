@@ -96,10 +96,10 @@ class DoubleLL
 			delete temp;
 		}
 
-	void RemoveItem(T value)
+		void RemoveItem(T value)
   		{
   			Node<T>* temp = head;
-  			if (head == nullptr) return; // List is empty
+  			if (head == nullptr) return;
 
   			while (temp != nullptr)
   			{
@@ -107,7 +107,6 @@ class DoubleLL
   				{
   					Node<T>* element = temp;
 
-  					// Update head and tail if needed
   					if (temp == head)
   					{
   						head = temp->next;
@@ -120,27 +119,19 @@ class DoubleLL
   					}
   					else
   					{
-  						// General case
   						temp->prev->next = temp->next;
   						temp->next->prev = temp->prev;
   					}
-
-  					// Move to the next node before deletion
   					temp = temp->next;
-
-  					// Delete the current node
   					delete element;
   					length--;
   				}
   				else
   				{
-  					// Move to the next node if no deletion
   					temp = temp->next;
   				}
   			}
   		}
-
-
 
 		bool isEmpty() const
 		{

@@ -3,7 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <map>
-#include "../json.hpp"
+#include "../third-party/json.hpp"
 #include "product.h"
 #include "../ds-templates/trie.h"
 

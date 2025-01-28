@@ -15,7 +15,7 @@
 #include <QToolButton>
 #include <QHBoxLayout>
 #include <QListWidget>
-#include "../supermarket-manager/headers/store.h"
+#include "../include/store.h"
 
 class GuiClass : public QWidget
 {

@@ -1,4 +1,4 @@
-#include "GuiClass.h"
+#include "gui/GuiClass.h"
 #include <QApplication>
 #include <QString>
 

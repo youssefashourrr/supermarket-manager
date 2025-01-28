@@ -2,7 +2,7 @@
 #include <fstream>
 #include <unordered_map>
 #include <vector>
-#include "../json.hpp"
+#include "../third-party/json.hpp"
 
 using namespace std;
 using json = nlohmann::json;

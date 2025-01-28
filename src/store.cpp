@@ -1,4 +1,4 @@
-#include "headers/store.h"
+#include "../include/store.h"
 
 Store::Store()
 {
@@ -49,11 +49,11 @@ bool Store::removeCategory(const string& name) {
     {
         if (it->first.getCode().substr(0, 3) == identifier)
         {
-            it = inventory->removeProduct(it->first); // Safely remove and advance the iterator
+            it = inventory->removeProduct(it->first);
         }
         else
         {
-            ++it; // Advance the iterator if no removal
+            ++it;
         }
     }
     cout << name<< endl;

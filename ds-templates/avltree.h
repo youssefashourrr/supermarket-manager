@@ -16,13 +16,10 @@ private:
     }
 
     BSTNode<T>* RotateRight(BSTNode<T>* r) {
-        if (r == nullptr || r->left == nullptr) return r; // Guard
+        if (r == nullptr || r->left == nullptr) return r;
         BSTNode<T>* newRoot = r->left;
         r->left = newRoot->right;
         newRoot->right = r;
-           // 5
-        ////3
-        //
         r->height = 1 + max(height(r->left), height(r->right));
         newRoot->height = 1 + max(height(newRoot->left), height(newRoot->right));
 
@@ -30,7 +27,7 @@ private:
     }
 
     BSTNode<T>* RotateLeft(BSTNode<T>* r) {
-        if (r == nullptr || r->right == nullptr) return r; // Guard
+        if (r == nullptr || r->right == nullptr) return r;
         BSTNode<T>* newRoot = r->right;
         r->right = newRoot->left;
         newRoot->left = r;

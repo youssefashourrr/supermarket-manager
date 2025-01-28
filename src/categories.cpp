@@ -1,9 +1,9 @@
-#include "headers/categories.h"
+#include "../include/categories.h"
 
 
 Categories::Categories() {
     groups.clear();
-    ifstream file("D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/data/categories.json", ios::in | ios::ate);
+    ifstream file("../data/categories.json", ios::in | ios::ate);
     if (!file.is_open()) {
         cout << "Failed to open categories file. Initializing empty categories." << endl;
         return;
@@ -57,9 +57,9 @@ Categories::Categories() {
 Categories::~Categories() {
     saveToFile();
     for (auto category : groups) {
-        delete category;  // Free allocated memory
+        delete category;
     }
-    groups.clear();  // Clear the set after deletion
+    groups.clear();
 }
 
 set<Category*>* Categories::getGroups() {
@@ -87,7 +87,6 @@ set<Category*>::iterator Categories::findCategory(string name)
 
         if ((*it)->getName() == name)
         {
-            //cout<<(*it)->getName()<<endl;
             return it;
         }
     }
@@ -108,8 +107,8 @@ bool Categories::addCategory(Category* c) {
 bool Categories::removeCategory(string name) {
     auto it = findCategory(name);
     if (it != groups.end()) {
-        delete *it;          // Free memory for the removed category
-        groups.erase(it);    // Remove from the set
+        delete *it;          
+        groups.erase(it);    
         saveToFile();
         return true;
     } else
@@ -120,11 +119,11 @@ bool Categories::removeCategory(string name) {
 }
 
 void Categories::saveToFile() {
-    ofstream outFile("D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/data/categories.json");
+    ofstream outFile("../data/categories.json");
     if (outFile.is_open()) {
         json categoriesJson = json::array();
         for (const auto& category : groups) {
-            if (category == nullptr) continue;  // Avoid null pointer access
+            if (category == nullptr) continue;
             json categoryJson;
             categoryJson["name"] = category->getName();
             categoryJson["productCount"] = category->getProductCount();

@@ -1,4 +1,4 @@
-#include "headers/category.h"
+#include "../include/category.h"
 
 
 Category::Category(string name)

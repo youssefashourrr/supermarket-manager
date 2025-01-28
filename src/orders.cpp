@@ -1,4 +1,4 @@
-#include "headers/orders.h"
+#include "../include/orders.h"
 
 
 Orders::Orders() {
@@ -21,7 +21,7 @@ vector<Order*>* Orders::getProcessed()
 void Orders::addOrder(Order* order)
 {
     pendingQ.push(order);
-    savePendingOrders();  // Save updated pending orders to file
+    savePendingOrders();
 }
 
 bool Orders::processOrder() {
@@ -30,8 +30,8 @@ bool Orders::processOrder() {
         processed.push_back(current);
         pendingQ.pop();
         if (pendingQ.empty()) pendingQ = {};
-        savePendingOrders();   // Save updated pending orders to file
-        saveProcessedOrders(); // Save updated processed orders to file}
+        savePendingOrders(); 
+        saveProcessedOrders();
         return true;
     }
     return false;
@@ -39,7 +39,7 @@ bool Orders::processOrder() {
 
 void Orders::loadPendingOrders() {
     pendingQ = queue<Order*>();
-    ifstream pendingFile("D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/data/pending_orders.json", ios::in | ios::ate);
+    ifstream pendingFile("../data/pending_orders.json", ios::in | ios::ate);
 
     if (!pendingFile.is_open()) {
         cout << "Failed to open pending orders file. Initializing empty queue." << endl;
@@ -88,7 +88,7 @@ void Orders::loadPendingOrders() {
     }
 }
 void Orders::loadProcessedOrders() {
-    ifstream processedFile("D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/data/processed_orders.json",  ios::in | ios::ate);
+    ifstream processedFile("../data/processed_orders.json",  ios::in | ios::ate);
 
     if (!processedFile.is_open()) {
         cout << "Failed to open order history file. Initializing empty vector." << endl;
@@ -138,11 +138,10 @@ void Orders::loadProcessedOrders() {
 }
 void Orders::savePendingOrders()
 {
-    ofstream pendingFile("D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/data/pending_orders.json");
+    ofstream pendingFile("../data/pending_orders.json");
     if (pendingFile.is_open())
     {
         json pendingJson;
-        // Iterate through the pending orders and serialize them
         while (!pendingQ.empty()) {
             Order* order = pendingQ.front();
             pendingQ.pop();
@@ -166,11 +165,10 @@ void Orders::savePendingOrders()
 }
 void Orders::saveProcessedOrders()
 {
-    ofstream processedFile("D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/data/processed_orders.json");
+    ofstream processedFile("../data/processed_orders.json");
     if (processedFile.is_open()) {
         json processedJson;
 
-        // Serialize processed orders
         for (const auto& order : processed) {
             json orderJson;
             orderJson["email"] = order->getBuyer();

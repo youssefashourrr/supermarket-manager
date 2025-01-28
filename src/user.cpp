@@ -1,4 +1,4 @@
-#include "headers/user.h"
+#include "../include/user.h"
 
 
 User::User()
@@ -8,7 +8,7 @@ User::User()
 
 bool User::manageRegisterOrLogin(string email, string password)
 {
-    ifstream file("D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/data/user_profiles.json", ios::in | ios::ate);
+    ifstream file("../data/user_profiles.json", ios::in | ios::ate);
     json profilesJson;
 
     if (!file.is_open()) {
@@ -32,19 +32,16 @@ bool User::manageRegisterOrLogin(string email, string password)
     }
     file.close();
 
-    // Check if the email exists in the profiles
     for (const auto& profileJson : profilesJson) {
         try {
             if (profileJson.at("email") == email)
             {
-                // Check if the password matches
                 if (profileJson.at("password") != password) {
                     cout << "Password does not match for email" << endl;
                     return false;
                 }
                 this->email = email;
                 this->password = password;
-                // Copy purchase history
                 if (profileJson.contains("purchaseHistory") && profileJson.at("purchaseHistory").is_object()) {
                     for (const auto& [productName, quantity] : profileJson.at("purchaseHistory").items()) {
                         this->purchaseHistory[productName] = quantity;
@@ -61,16 +58,14 @@ bool User::manageRegisterOrLogin(string email, string password)
     }
     this->email = email;
     this->password = password;
-    // If email not found, add new profile
     json newProfile = {
         {"email", email},
         {"password", password},
-        {"purchaseHistory", json::object()} // Empty JSON object for future purchases
+        {"purchaseHistory", json::object()}
     };
     profilesJson.push_back(newProfile);
 
-    // Save the updated profiles back to the file
-    ofstream outFile("D:/PBLB/UNI/Data Stucts/SuperMarket/supermarket-manager/data/user_profiles.json", ios::out | ios::trunc);
+    ofstream outFile("../data/user_profiles.json", ios::out | ios::trunc);
     if (!outFile.is_open()) {
         cout << "Failed to write to profiles file." << endl;
         return false;
@@ -83,8 +78,7 @@ bool User::manageRegisterOrLogin(string email, string password)
 }
 
 void User::savePurchases() {
-    // Open the file for reading
-    ifstream inFile("data/user_profiles.json", ios::in);
+    ifstream inFile("../data/user_profiles.json", ios::in);
     if (!inFile.is_open()) {
         cout << "Failed to open the profiles file." << endl;
         return;
@@ -92,7 +86,7 @@ void User::savePurchases() {
 
     json profilesJson;
     try {
-        inFile >> profilesJson;  // Read the existing profiles JSON
+        inFile >> profilesJson;
         inFile.close();
     } catch (const std::exception& e) {
         cout << "Error parsing JSON: " << e.what() << endl;
@@ -100,16 +94,13 @@ void User::savePurchases() {
         return;
     }
 
-    // Loop through the profiles to find the user by email
     for (auto& profileJson : profilesJson) {
         if (profileJson.contains("email") && profileJson["email"] == email) {
-            // Convert purchaseHistory to JSON format
             json purchaseHistoryJson;
             for (const auto& entry : purchaseHistory) {
                 purchaseHistoryJson[entry.first] = entry.second;
             }
-            // Update the purchase history of the found user
-            profileJson["purchaseHistory"] = purchaseHistoryJson;  // Update purchase history
+            profileJson["purchaseHistory"] = purchaseHistoryJson;
         }
     }
 }
