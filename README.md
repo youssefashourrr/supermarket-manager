@@ -1,10 +1,10 @@
-# 🛒 Supermarket Management System
+# Supermarket Management System 🛒
 
 A comprehensive desktop application for managing supermarket operations, built with C++ and Qt framework. This system provides both administrative and user interfaces for efficient supermarket management.
 
 ## ✨ Features
 
-### 👨‍💼 Administrative Features
+### Administrative Features
 - Category Management
   - Add new product categories
   - Remove existing categories
@@ -17,7 +17,7 @@ A comprehensive desktop application for managing supermarket operations, built w
   - Track order history
   - Manage order status
 
-### 👤 User Features
+### User Features
 - User Authentication
   - Secure login system
   - User registration
@@ -34,16 +34,7 @@ A comprehensive desktop application for managing supermarket operations, built w
   - Order history
   - Order status tracking
 
-## 🛠️ Technical Details
-
-### 🏗️ Built With
-- C++
-- Qt Framework
-- Data Structures
-  - Trie (for efficient product search)
-  - Custom data structures for inventory management
-
-### 📁 Project Structure
+## 📂 Project Structure
 ```
 supermarket-manager/
 ├── src/           # Source files
@@ -51,34 +42,7 @@ supermarket-manager/
 ├── gui/          # GUI implementation
 ├── data/         # Data storage
 ├── ds-templates/ # Data structure templates
-└── third-party/  # Third-party dependencies
-```
-
-## 📋 Prerequisites
-
-- C++ compiler (C++11 or higher)
-- Qt Framework (5.x or higher)
-- CMake (for building)
-
-## 🚀 Building and Running
-
-1. Clone the repository:
-```bash
-git clone [repository-url]
-cd supermarket-manager
-```
-
-2. Build the project:
-```bash
-mkdir build
-cd build
-cmake ..
-make
-```
-
-3. Run the application:
-```bash
-./supermarket-manager
+└── third-party/  # Dependencies
 ```
 
 ## Team
