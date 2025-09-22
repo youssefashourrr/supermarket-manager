@@ -23,7 +23,6 @@ A comprehensive desktop application for managing supermarket operations, built w
   - User registration
 - Shopping Experience
   - Browse products by categories
-  - Search products using Trie data structure
   - View product details
 - Shopping Cart
   - Add/remove items
